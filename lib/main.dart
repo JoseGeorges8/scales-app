@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scales_app/bloc_providers/theme_bloc_provider.dart';
+import 'package:scales_app/blocs/theme_bloc/bloc.dart';
 import 'package:scales_app/pages/home.dart';
-import 'package:scales_app/theme_bloc/bloc.dart';
 import 'package:bloc/bloc.dart';
+
+import 'bloc_providers/scales_bloc_provider.dart';
+import 'pages/home.dart';
 
 class SimpleBlocDelegate extends BlocDelegate {
   @override
@@ -39,7 +42,7 @@ class App extends StatelessWidget {
         return MaterialApp(
           title: 'Scale Up',
           theme: themeState.theme,
-          home: HomePage(),
+          home: ScalesBlocProvider(child: HomePage()),
         );
       },
     );

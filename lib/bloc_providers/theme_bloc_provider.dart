@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:scales_app/theme_bloc/theme_bloc.dart';
+import 'package:scales_app/blocs/theme_bloc/bloc.dart';
 
 class ThemeBlocProvider extends StatelessWidget{
 

@@ -1,5 +1,5 @@
 import 'package:flutter/src/material/theme_data.dart';
-import 'package:scales_app/theme_bloc/theme_base_provider.dart';
+import 'package:scales_app/data_providers/theme_data_provider/theme_base_provider.dart';
 import 'package:scales_app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

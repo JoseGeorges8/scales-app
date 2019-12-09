@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:scales_app/theme_bloc/theme_repository.dart';
-import 'package:scales_app/theme_bloc/theme_sharedpref_provider.dart';
+import 'package:scales_app/blocs/theme_bloc/theme_repository.dart';
+import 'package:scales_app/data_providers/theme_data_provider/theme_sharedpref_provider.dart';
 import 'package:scales_app/utils/themes.dart';
 import './bloc.dart';
 

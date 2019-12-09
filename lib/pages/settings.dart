@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:scales_app/theme_bloc/bloc.dart';
+import 'package:scales_app/blocs/theme_bloc/bloc.dart';
 import 'package:scales_app/utils/constants.dart';
 import 'package:scales_app/utils/themes.dart';
 import 'package:scales_app/widgets/home_app_bar.dart';
