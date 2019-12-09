@@ -28,13 +28,13 @@ class App extends StatelessWidget {
     return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, themeState) {
 
-        if(themeState.isLoading){
-          return MaterialApp(
-            title: 'Scale Up',
-            theme: themeState.theme,
-            home: Scaffold(body: Center(child: CircularProgressIndicator(),),),
-          );
-        }
+//        if(themeState.isLoading){
+//          return MaterialApp(
+//            title: 'Scale Up',
+//            theme: themeState.theme,
+//            home: Scaffold(body: Center(child: CircularProgressIndicator(),),),
+//          );
+//        }
 
         return MaterialApp(
           title: 'Scale Up',
