@@ -8,7 +8,6 @@ import './bloc.dart';
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
 
   String currentTheme;
-
   final ThemeRepository _repository = ThemeRepository(provider: ThemeSharedPrefProvider());
 
   ///This initial state should be defined by shared pref
