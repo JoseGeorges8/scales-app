@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scales_app/bloc_providers/notes_bloc_provider.dart';
 import 'package:scales_app/bloc_providers/theme_bloc_provider.dart';
 import 'package:scales_app/blocs/theme_bloc/bloc.dart';
 import 'package:scales_app/pages/home.dart';
@@ -30,7 +31,6 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, themeState) {
-
 //        if(themeState.isLoading){
 //          return MaterialApp(
 //            title: 'Scale Up',
@@ -38,11 +38,10 @@ class App extends StatelessWidget {
 //            home: Scaffold(body: Center(child: CircularProgressIndicator(),),),
 //          );
 //        }
-
         return MaterialApp(
           title: 'Scale Up',
           theme: themeState.theme,
-          home: ScalesBlocProvider(child: HomePage()),
+          home: NotesBlocProvider(child: HomePage()),
         );
       },
     );
