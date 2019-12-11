@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scales_app/bloc_providers/scales_bloc_provider.dart';
+import 'package:scales_app/blocs/notes_bloc/bloc.dart';
+import 'package:scales_app/models/Note.dart';
 import 'package:scales_app/pages/settings.dart';
 import 'package:scales_app/utils/constants.dart';
 import 'package:scales_app/widgets/draggable_scales_sheet.dart';
 import 'package:scales_app/widgets/home_app_bar.dart';
+import 'package:scales_app/widgets/note_button.dart';
 
 class HomePage extends StatefulWidget {
-
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin{
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  NotesBloc _notesBloc;
 
   @override
   void initState() {
+    _notesBloc = BlocProvider.of<NotesBloc>(context);
     super.initState();
   }
 
@@ -29,13 +36,18 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                   builder: (BuildContext context) => SettingsPage())))
         ],
       ),
-      body: SizedBox.expand(
-        child: Stack(
-          children: <Widget>[
-            Center(child: Text('home page')),
-            DraggableScalesSheet()
-          ],
-        ),
+      body: ScalesBlocProvider(
+        child: BlocBuilder<NotesBloc, NotesState>(
+            builder: (BuildContext context, NotesState state) {
+                return SizedBox.expand(
+                  child: Stack(
+                    children: <Widget>[
+                      Center(child: _buildNoteButtonsGroup(state.notes)),
+                      DraggableScalesSheet()
+                    ],
+                  ),
+                );
+        }),
       ),
 //      floatingActionButton: GestureDetector(
 //        child: FloatingActionButton(
@@ -50,8 +62,23 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 //              _controller.reverse();
 //          },
 //        ),
-      );
+    );
   }
 
-
+  _buildNoteButtonsGroup(List<Note> notes) {
+    return Container(
+      height: 300,
+      child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: notes
+              .map((note) => NoteButton(
+                    note: note,
+                    onTap: () {
+                      final Note updatedNote = Note(isSharp: note.isSharp, value: note.value, isSelected: true);
+                      _notesBloc.add(UpdateNote(updatedNote));
+                    },
+                  ))
+              .toList()),
+    );
+  }
 }

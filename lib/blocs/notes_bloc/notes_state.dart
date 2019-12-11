@@ -1,10 +1,17 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
+import 'package:scales_app/models/Note.dart';
 
-abstract class NotesState extends Equatable {
-  const NotesState();
-}
+class NotesState extends Equatable {
+  final List<Note> notes;
 
-class InitialNotesState extends NotesState {
+  NotesState({@required this.notes});
+
   @override
-  List<Object> get props => [];
+  String toString() {
+    return 'NotesLoaded{notes: $notes}';
+  }
+
+  @override
+  List<Object> get props => [notes];
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:scales_app/models/Note.dart';
 
 ///Represents one pressable note. It holds a note model
@@ -11,7 +12,10 @@ class NoteButton extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return RaisedButton(
+      onPressed: note.isSelected ?  null : onTap,
+      color: note.isSharp ? Colors.black : Colors.white,
+    );
   }
 
 }

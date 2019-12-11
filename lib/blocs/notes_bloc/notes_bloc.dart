@@ -1,10 +1,15 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:scales_app/blocs/notes_bloc/notes_repository.dart';
+import 'package:scales_app/data_providers/notes_data_provider/notes_basic_provider.dart';
 import './bloc.dart';
 
 class NotesBloc extends Bloc<NotesEvent, NotesState> {
+
+  final NotesRepository _notesRepository = NotesRepository(provider: NotesBasicProvider());
+
   @override
-  NotesState get initialState => InitialNotesState();
+  NotesState get initialState => NotesState(notes: _notesRepository.getNotes());
 
   @override
   Stream<NotesState> mapEventToState(
@@ -16,9 +21,8 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
   }
 
   Stream<NotesState> _mapUpdateNoteToState(UpdateNote event) async* {
-    if (state is InitialNotesState) {
-        //todo: update the notes here and add a state that the scales bloc can listen and react to
-    }
+    _notesRepository.updateNote(note: event.updatedNote);
+    yield NotesState(notes: _notesRepository.getNotes());
   }
 
 }

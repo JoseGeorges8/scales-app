@@ -5,9 +5,8 @@ class ScalesFileProvider extends ScalesBaseProvider{
 
 
   @override
-  Stream<List<Scale>> scales() {
-
-    return null;
+  Stream<List<Scale>> scales() async* {
+    yield [];
   }
 
 }

@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:scales_app/blocs/notes_bloc/bloc.dart';
 import 'package:scales_app/blocs/scales_bloc/scales_repository.dart';
 import 'package:scales_app/data_providers/scales_data_provider/scales_file_provider.dart';
+import 'package:scales_app/models/Note.dart';
 import 'package:scales_app/models/Scale.dart';
 import 'bloc.dart';
 
@@ -17,8 +18,17 @@ class ScalesBloc extends Bloc<ScalesEvent, ScalesState> {
       {@required NotesBloc notesBloc})
       : assert(notesBloc != null),
         _notesBloc = notesBloc {
+
+
     _notesSubscription = _notesBloc.listen((state) {
-      ///React to events coming from the notes bloc e.g adding a note, removing a note, clearing all notes
+      print("Listening from the ScalesBloc");
+        final List<Note> selectedNotes = [];
+        for(Note note in state.notes) {
+          if(note.isSelected){
+            print("${note.value} selected");
+            selectedNotes.add(note);
+          }
+        }
     });
   }
 
