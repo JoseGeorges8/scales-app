@@ -3,6 +3,9 @@ import 'package:scales_app/models/Note.dart';
 
 abstract class NotesEvent extends Equatable {
   const NotesEvent();
+
+  @override
+  List<Object> get props => [];
 }
 
 
