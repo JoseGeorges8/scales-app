@@ -27,9 +27,7 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
     final List<Note> updatedNotes = state.notes.map((note) {
       return note.value == event.updatedNote.value ? event.updatedNote : note;
     }).toList();
-    print(NotesState(notes: updatedNotes) == state);
     yield NotesState(notes: updatedNotes);
-    print(NotesState(notes: updatedNotes) == state);
   }
 
 }

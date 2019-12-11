@@ -23,6 +23,17 @@ class Note extends Equatable{
     @required this.isSharp,
   });
 
+  Note copyWith({
+    String value,
+    bool isSelected,
+    bool isSharp,
+  }) =>
+      Note(
+        value: value ?? this.value,
+        isSelected: isSelected ?? this.isSelected,
+        isSharp: isSharp ?? this.isSharp,
+      );
+
   factory Note.fromMap(Map<String, dynamic> json) => Note(
     value: json["value"],
     isSelected: json["is_selected"],

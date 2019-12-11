@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage>
                 return SizedBox.expand(
                   child: Stack(
                     children: <Widget>[
-                      Center(child: _buildNoteButtonsGroup(state.notes)),
+                      _buildNoteButtonsGroup(state.notes),
                       DraggableScalesSheet()
                     ],
                   ),
@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage>
               .map((note) => NoteButton(
                     note: note,
                     onTap: () {
-                      final Note updatedNote = Note(isSharp: note.isSharp, value: note.value, isSelected: true);
+                      final Note updatedNote = note.copyWith(isSharp: note.isSharp, value: note.value, isSelected: !note.isSelected);
                       _notesBloc.add(UpdateNote(updatedNote));
                     },
                   ))

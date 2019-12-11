@@ -13,8 +13,8 @@ class NoteButton extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return RaisedButton(
-      onPressed: note.isSelected ?  null : onTap,
-      color: note.isSharp ? Colors.black : Colors.white,
+      onPressed: onTap,
+      color: note.isSharp ? note.isSelected ? Colors.black.withOpacity(.5) : Colors.black : note.isSelected ? Colors.white.withOpacity(.5) : Colors.white,
     );
   }
 
