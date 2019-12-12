@@ -32,4 +32,11 @@ class Scale {
     "type": type == null ? null : type,
     "notes": notes == null ? null : List<dynamic>.from(notes.map((x) => x)),
   };
+
+  @override
+  String toString() {
+    return '$root $type';
+  }
+
+
 }

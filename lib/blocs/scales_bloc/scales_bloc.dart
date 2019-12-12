@@ -12,23 +12,15 @@ class ScalesBloc extends Bloc<ScalesEvent, ScalesState> {
   final NotesBloc _notesBloc;
   StreamSubscription _notesSubscription;
   StreamSubscription _scalesSubscription;
-  final ScalesRepository _scalesRepository = ScalesRepository(provider: ScalesFileProvider());
+  final ScalesRepository _scalesRepository = ScalesRepository(provider: ScalesBasicProvider());
 
   ScalesBloc(
       {@required NotesBloc notesBloc})
       : assert(notesBloc != null),
         _notesBloc = notesBloc {
 
-
     _notesSubscription = _notesBloc.listen((state) {
-      print("Listening from the ScalesBloc");
-        final List<Note> selectedNotes = [];
-        for(Note note in state.notes) {
-          if(note.isSelected){
-            print("${note.value} selected");
-            selectedNotes.add(note);
-          }
-        }
+      add(ScalesUpdated(scales: _scalesRepository.getScales(selectedNotes: _notesBloc.selectedNotes)));
     });
   }
 
@@ -40,9 +32,12 @@ class ScalesBloc extends Bloc<ScalesEvent, ScalesState> {
 
   initialize() {
     _scalesSubscription?.cancel();
-    _scalesSubscription = _scalesRepository.scales().listen(
-          (scales) => add(ScalesUpdated(scales: scales)),
-        );
+//    _scalesSubscription = _scalesRepository.scales().listen(
+//          (scales) {
+//            print("Got new scales...");
+//            add(ScalesUpdated(scales: scales));
+//          },
+//        );
   }
 
   @override

@@ -8,5 +8,6 @@ class ScalesRepository{
   ScalesRepository({@required this.provider});
 
   Stream<List<Scale>> scales() => provider.scales();
+  List<Scale> getScales({List<String> selectedNotes}) => provider.getScales(selectedNotes);
 
 }

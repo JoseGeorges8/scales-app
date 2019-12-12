@@ -4,4 +4,6 @@ abstract class ScalesBaseProvider{
 
   Stream<List<Scale>> scales();
 
+  List<Scale> getScales(List<String> selectedNotes);
+
 }

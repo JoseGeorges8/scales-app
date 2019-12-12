@@ -7,6 +7,8 @@ import './bloc.dart';
 
 class NotesBloc extends Bloc<NotesEvent, NotesState> {
 
+  final List<String> selectedNotes = List<String>();
+
   final NotesRepository _notesRepository = NotesRepository(provider: NotesBasicProvider());
 
   @override
@@ -24,6 +26,16 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
   }
 
   Stream<NotesState> _mapUpdateNoteToState(UpdateNote event) async* {
+
+
+    if(selectedNotes.contains(event.updatedNote.value)){
+      selectedNotes.remove(event.updatedNote.value);
+    }
+
+    if(event.updatedNote.isSelected){
+      selectedNotes.add(event.updatedNote.value);
+    }
+
     final List<Note> updatedNotes = state.notes.map((note) {
       return note.value == event.updatedNote.value ? event.updatedNote : note;
     }).toList();
