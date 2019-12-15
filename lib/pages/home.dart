@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scales_app/bloc_providers/scales_bloc_provider.dart';
 import 'package:scales_app/blocs/notes_bloc/bloc.dart';
-import 'package:scales_app/models/Note.dart';
 import 'package:scales_app/pages/settings.dart';
 import 'package:scales_app/utils/constants.dart';
 import 'package:scales_app/widgets/draggable_scales_sheet.dart';
 import 'package:scales_app/widgets/home_app_bar.dart';
-import 'package:scales_app/widgets/note_button.dart';
+import 'package:scales_app/widgets/note_button_group.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,6 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
+
   NotesBloc _notesBloc;
 
   @override
@@ -42,43 +42,14 @@ class _HomePageState extends State<HomePage>
                 return SizedBox.expand(
                   child: Stack(
                     children: <Widget>[
-                      _buildNoteButtonsGroup(state.notes),
+                      NotesButtonGroup(notesBloc: _notesBloc, notes: state.notes),
                       DraggableScalesSheet()
                     ],
                   ),
                 );
         }),
       ),
-//      floatingActionButton: GestureDetector(
-//        child: FloatingActionButton(
-//          child: AnimatedIcon(icon: AnimatedIcons.menu_close, progress: _controller),
-//          elevation: 5,
-//          backgroundColor: Colors.deepOrange,
-//          foregroundColor: Colors.white,
-//          onPressed: () async {
-//            if (_controller.isDismissed)
-//              _controller.forward();
-//            else if (_controller.isCompleted)
-//              _controller.reverse();
-//          },
-//        ),
     );
   }
 
-  _buildNoteButtonsGroup(List<Note> notes) {
-    return Container(
-      height: 300,
-      child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: notes
-              .map((note) => NoteButton(
-                    note: note,
-                    onTap: () {
-                      final Note updatedNote = note.copyWith(isSharp: note.isSharp, value: note.value, isSelected: !note.isSelected);
-                      _notesBloc.add(UpdateNote(updatedNote));
-                    },
-                  ))
-              .toList()),
-    );
-  }
 }

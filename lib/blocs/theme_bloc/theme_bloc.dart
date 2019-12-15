@@ -27,10 +27,10 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     if (event is AppThemeChanged) {
       currentTheme = event.theme;
       _repository.setTheme(theme: event.theme);
-      yield ThemeState(theme: appThemeData[event.theme]);
+      yield ThemeState(value: currentTheme, theme: appThemeData[event.theme]);
     }
     if (event is AppInitialized) {
-      yield ThemeState(theme: appThemeData[currentTheme]);
+      yield ThemeState(value: currentTheme, theme: appThemeData[currentTheme]);
     }
   }
 

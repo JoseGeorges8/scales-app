@@ -37,7 +37,7 @@ class DraggableScalesSheetState extends State<DraggableScalesSheet> with SingleT
           child: DraggableScrollableSheet(
             builder: (BuildContext context, ScrollController scrollController) {
               return Container(
-                decoration: BoxDecoration(borderRadius: BorderRadius.vertical(top: Radius.circular(24)), color:Colors.blue[100]),
+                decoration: BoxDecoration(borderRadius: BorderRadius.vertical(top: Radius.circular(24)), color: Theme.of(context).accentColor),
                 child: Column(
                   children: <Widget>[
                     SingleChildScrollView(

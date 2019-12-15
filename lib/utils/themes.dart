@@ -10,7 +10,8 @@ final appThemeData = {
 class AppThemes {
   static ThemeData get pianoTheme {
     return ThemeData(
-        appBarTheme: AppBarTheme(color: Colors.transparent),
+        appBarTheme: AppBarThemes.pianoTheme,
+        textTheme: TextThemes.pianoTheme,
         primaryColor: pianoPrimaryColor,
         accentColor: pianoAccentColor,
         backgroundColor: pianoBackgroundColor,
@@ -20,7 +21,47 @@ class AppThemes {
 
   static ThemeData get drumpadTheme {
     return ThemeData(
-        appBarTheme: AppBarTheme(color: Colors.transparent),
-        scaffoldBackgroundColor: Colors.redAccent);
+        appBarTheme: AppBarThemes.drumpadTheme,
+        textTheme: TextThemes.drumpadTheme,
+        primaryColor: drumpadPrimaryColor,
+        accentColor: drumpadAccentColor,
+        backgroundColor: drumpadBackgroundColor,
+        scaffoldBackgroundColor: drumpadBackgroundColor
+    );
   }
+}
+
+class AppBarThemes{
+
+  static AppBarTheme get pianoTheme{
+    return  AppBarTheme(
+        color: Colors.transparent,
+        textTheme: TextThemes.pianoTheme
+    );
+  }
+
+  static AppBarTheme get drumpadTheme{
+    return  AppBarTheme(
+        color: Colors.transparent,
+        textTheme: TextThemes.drumpadTheme
+    );
+  }
+
+
+}
+
+class TextThemes{
+
+  static TextTheme get pianoTheme{
+    return TextTheme(
+        title: TextStyle(color: pianoAccentColor)
+    );
+  }
+  static TextTheme get drumpadTheme{
+    return TextTheme(
+        title: TextStyle(color: drumpadAccentColor)
+    );
+  }
+
+
 }
