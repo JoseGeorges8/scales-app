@@ -5,25 +5,22 @@ class NotesBasicProvider extends NotesBaseProvider{
 
   ///All the available notes
   final List<Note> _notes = [
-    Note(value: 'C', isSelected: false, isSharp: false),
-    Note(value: 'D♭', isSelected: false, isSharp: true),
-    Note(value: 'D', isSelected: false, isSharp: false),
-    Note(value: 'E♭', isSelected: false, isSharp: true),
-    Note(value: 'E', isSelected: false, isSharp: false),
-    Note(value: 'F', isSelected: false, isSharp: false),
-    Note(value: 'G♭', isSelected: false, isSharp: true),
-    Note(value: 'G', isSelected: false, isSharp: false),
-    Note(value: 'A♭', isSelected: false, isSharp: true),
-    Note(value: 'A', isSelected: false, isSharp: false),
-    Note(value: 'B♭', isSelected: false, isSharp: true),
-    Note(value: 'B', isSelected: false, isSharp: false),
+    Note(value: 'C', isSelected: false, isSharp: false, midi: 60),
+    Note(value: 'D♭', isSelected: false, isSharp: true, midi: 61),
+    Note(value: 'D', isSelected: false, isSharp: false, midi: 62),
+    Note(value: 'E♭', isSelected: false, isSharp: true, midi: 63),
+    Note(value: 'E', isSelected: false, isSharp: false, midi: 64),
+    Note(value: 'F', isSelected: false, isSharp: false, midi: 65),
+    Note(value: 'G♭', isSelected: false, isSharp: true, midi: 66),
+    Note(value: 'G', isSelected: false, isSharp: false, midi: 67),
+    Note(value: 'A♭', isSelected: false, isSharp: true, midi: 68),
+    Note(value: 'A', isSelected: false, isSharp: false, midi: 69),
+    Note(value: 'B♭', isSelected: false, isSharp: true, midi: 70),
+    Note(value: 'B', isSelected: false, isSharp: false, midi: 71),
   ];
 
   @override
   List<Note> getNotes() => _notes;
-
-  @override
-  Future<List<Note>> getAsyncNotes() async => _notes;
 
   @override
   void updateNote(Note updatedNote) {

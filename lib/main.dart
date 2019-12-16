@@ -7,6 +7,8 @@ import 'package:scales_app/pages/home.dart';
 import 'package:bloc/bloc.dart';
 
 import 'bloc_providers/scales_bloc_provider.dart';
+import 'blocs/notes_bloc/notes_bloc.dart';
+import 'blocs/sound_bloc/sound_bloc.dart';
 import 'pages/home.dart';
 
 class SimpleBlocDelegate extends BlocDelegate {
@@ -31,17 +33,19 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, themeState) {
-//        if(themeState.isLoading){
-//          return MaterialApp(
-//            title: 'Scale Up',
-//            theme: themeState.theme,
-//            home: Scaffold(body: Center(child: CircularProgressIndicator(),),),
-//          );
-//        }
         return MaterialApp(
           title: 'Scale Up',
           theme: themeState.theme,
-          home: NotesBlocProvider(child: HomePage()),
+          home: MultiBlocProvider(
+              providers: [
+                BlocProvider<NotesBloc>(
+                  create: (context) => NotesBloc(),
+                ),
+                BlocProvider<SoundBloc>(
+                  create: (context) => SoundBloc(),
+                ),
+              ],
+              child: HomePage()),
         );
       },
     );

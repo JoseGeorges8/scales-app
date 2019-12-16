@@ -9,7 +9,6 @@ class NotesRepository{
   NotesRepository({@required this.provider});
 
   List<Note> getNotes() => provider.getNotes();
-  Future<List<Note>> getAsyncNotes() => provider.getAsyncNotes();
   void updateNote({Note note}) => provider.updateNote(note);
 
 }
