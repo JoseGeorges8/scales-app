@@ -42,7 +42,10 @@ class _HomePageState extends State<HomePage>
                 return SizedBox.expand(
                   child: Stack(
                     children: <Widget>[
-                      NotesButtonGroup(notesBloc: _notesBloc, notes: state.notes),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: NotesButtonGroup(notesBloc: _notesBloc, notes: state.notes),
+                      ),
                       DraggableScalesSheet()
                     ],
                   ),

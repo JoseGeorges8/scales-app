@@ -10,10 +10,14 @@ class SettingsRow extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: isSelected ? null : onRowPressed,
-      title: Text(title),
-      trailing: isSelected ? Icon(Icons.check) : null,
+    return ListTileTheme(
+      textColor: Theme.of(context).accentColor,
+      iconColor: Theme.of(context).accentColor,
+      child: ListTile(
+        onTap: isSelected ? null : onRowPressed,
+        title: Text(title),
+        trailing: isSelected ? Icon(Icons.check) : null,
+      ),
     );
   }
 

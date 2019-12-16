@@ -6,7 +6,12 @@ class ScalesBasicProvider extends ScalesBaseProvider{
 
   final List<Scale> _scales = [
     Scale(root: 'C', type: 'Major', notes: ['C', 'D', 'E', 'F', 'G', 'A', 'B']),
-    Scale(root: 'D', type: 'Major', notes: ['D', 'E', 'Eb', 'G', 'A', 'B', 'Bb']),
+    Scale(root: 'D', type: 'Major', notes: ['D', 'E', 'E♭', 'G', 'A', 'B', 'B♭']),
+    Scale(root: 'E', type: 'Major', notes: ['E', 'G♭', 'A♭' ,'A',  'B', 'D♭', 'E♭', 'E']),
+    Scale(root: 'F', type: 'Major', notes: []),
+    Scale(root: 'G', type: 'Major', notes: []),
+    Scale(root: 'A', type: 'Major', notes: []),
+    Scale(root: 'B', type: 'Major', notes: []),
   ];
 
   @override

@@ -3,7 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:scales_app/blocs/notes_bloc/bloc.dart';
 import 'package:scales_app/blocs/scales_bloc/scales_repository.dart';
-import 'package:scales_app/data_providers/scales_data_provider/scales_file_provider.dart';
+import 'package:scales_app/data_providers/scales_data_provider/scales_basic_provider.dart';
 import 'package:scales_app/models/Note.dart';
 import 'package:scales_app/models/Scale.dart';
 import 'bloc.dart';

@@ -6,16 +6,16 @@ class NotesBasicProvider extends NotesBaseProvider{
   ///All the available notes
   final List<Note> _notes = [
     Note(value: 'C', isSelected: false, isSharp: false),
-    Note(value: 'Db', isSelected: false, isSharp: true),
+    Note(value: 'D♭', isSelected: false, isSharp: true),
     Note(value: 'D', isSelected: false, isSharp: false),
-    Note(value: 'Eb', isSelected: false, isSharp: true),
+    Note(value: 'E♭', isSelected: false, isSharp: true),
     Note(value: 'E', isSelected: false, isSharp: false),
     Note(value: 'F', isSelected: false, isSharp: false),
-    Note(value: 'Gb', isSelected: false, isSharp: true),
+    Note(value: 'G♭', isSelected: false, isSharp: true),
     Note(value: 'G', isSelected: false, isSharp: false),
-    Note(value: 'Ab', isSelected: false, isSharp: true),
+    Note(value: 'A♭', isSelected: false, isSharp: true),
     Note(value: 'A', isSelected: false, isSharp: false),
-    Note(value: 'Bb', isSelected: false, isSharp: true),
+    Note(value: 'B♭', isSelected: false, isSharp: true),
     Note(value: 'B', isSelected: false, isSharp: false),
   ];
 

@@ -23,6 +23,7 @@ class AppThemes {
     return ThemeData(
         appBarTheme: AppBarThemes.drumpadTheme,
         textTheme: TextThemes.drumpadTheme,
+        cardTheme: CardTheme(color: drumpadCardColor),
         primaryColor: drumpadPrimaryColor,
         accentColor: drumpadAccentColor,
         backgroundColor: drumpadBackgroundColor,
@@ -36,7 +37,7 @@ class AppBarThemes{
   static AppBarTheme get pianoTheme{
     return  AppBarTheme(
         color: Colors.transparent,
-        textTheme: TextThemes.pianoTheme
+        textTheme: TextThemes.pianoTheme,
     );
   }
 
@@ -54,12 +55,12 @@ class TextThemes{
 
   static TextTheme get pianoTheme{
     return TextTheme(
-        title: TextStyle(color: pianoAccentColor)
+        title: TextStyle(color: pianoAccentColor, fontSize: 20)
     );
   }
   static TextTheme get drumpadTheme{
     return TextTheme(
-        title: TextStyle(color: drumpadAccentColor)
+        title: TextStyle(color: drumpadAccentColor, fontSize: 20)
     );
   }
 
