@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scales_app/bloc_providers/notes_bloc_provider.dart';
-import 'package:scales_app/bloc_providers/theme_bloc_provider.dart';
 import 'package:scales_app/blocs/theme_bloc/bloc.dart';
 import 'package:scales_app/pages/home.dart';
 import 'package:bloc/bloc.dart';
-
-import 'bloc_providers/scales_bloc_provider.dart';
-import 'blocs/notes_bloc/notes_bloc.dart';
 import 'blocs/sound_bloc/sound_bloc.dart';
 import 'pages/home.dart';
 
@@ -21,7 +17,16 @@ class SimpleBlocDelegate extends BlocDelegate {
 
 void main() {
   BlocSupervisor.delegate = SimpleBlocDelegate();
-  runApp(ThemeBlocProvider(child: App())
+  runApp(MultiBlocProvider(
+      providers: [
+        BlocProvider<ThemeBloc>(
+          create: (context) => ThemeBloc(),
+        ),
+        BlocProvider<SoundBloc>(
+          create: (context) => SoundBloc(),
+        ),
+      ],
+      child: App())
   );
 }
 
@@ -36,16 +41,7 @@ class App extends StatelessWidget {
         return MaterialApp(
           title: 'Scale Up',
           theme: themeState.theme,
-          home: MultiBlocProvider(
-              providers: [
-                BlocProvider<NotesBloc>(
-                  create: (context) => NotesBloc(),
-                ),
-                BlocProvider<SoundBloc>(
-                  create: (context) => SoundBloc(),
-                ),
-              ],
-              child: HomePage()),
+          home: NotesBlocProvider(child: HomePage()),
         );
       },
     );

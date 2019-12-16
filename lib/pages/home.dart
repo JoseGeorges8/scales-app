@@ -28,7 +28,6 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HomeAppBar(
-        title: HOME_TITLE,
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.settings),
