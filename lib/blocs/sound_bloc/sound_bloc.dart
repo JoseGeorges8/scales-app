@@ -16,6 +16,7 @@ class SoundBloc extends Bloc<SoundEvent, SoundState> {
   }
 
   playNote(Note note) => soundProvider.playNote(note);
+  changeSound(String sound) => soundProvider.changeSound(sound);
 
   @override
   Stream<SoundState> mapEventToState(

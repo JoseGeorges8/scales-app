@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scales_app/blocs/sound_bloc/bloc.dart';
 import 'package:scales_app/blocs/theme_bloc/bloc.dart';
 import 'package:scales_app/utils/constants.dart';
 import 'package:scales_app/utils/themes.dart';
@@ -12,14 +13,15 @@ class SettingsPage extends StatefulWidget{
   _SettingsPageState createState() => _SettingsPageState();
 }
 
-const themes = ['Piano', 'Drumpad'];
 
 class _SettingsPageState extends State<SettingsPage> {
    ThemeBloc _themeBloc;
+   SoundBloc _soundBloc;
 
    @override
   void initState() {
      _themeBloc = BlocProvider.of<ThemeBloc>(context);
+     _soundBloc = BlocProvider.of<SoundBloc>(context);
      super.initState();
   }
 
@@ -33,9 +35,9 @@ class _SettingsPageState extends State<SettingsPage> {
           itemCount: appThemeData.length,
           itemBuilder: (BuildContext context, int index){
             return SettingsRow(
-              isSelected: _themeBloc.currentTheme == themes[index],
-              title: themes[index],
-              onRowPressed: () => _onSettingsRowPressed(themes[index]),
+              isSelected: _themeBloc.currentTheme == _themeBloc.themes[index],
+              title: _themeBloc.themes[index],
+              onRowPressed: () => _onSettingsRowPressed(_themeBloc.themes[index]),
             );
           }
       ),
@@ -44,5 +46,9 @@ class _SettingsPageState extends State<SettingsPage> {
 
   _onSettingsRowPressed(String theme) {
      _themeBloc.add(AppThemeChanged(theme: theme));
+  }
+
+  _onSoundsRowPressed(String sound){
+     _soundBloc.changeSound(sound);
   }
 }

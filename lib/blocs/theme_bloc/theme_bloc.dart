@@ -7,6 +7,9 @@ import './bloc.dart';
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
 
+  final List<String> themes = ['Piano', 'Drumpad'];
+
+
   String currentTheme;
   final ThemeRepository _repository = ThemeRepository(provider: ThemeSharedPrefProvider());
 
