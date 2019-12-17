@@ -37,6 +37,8 @@ class AppBarThemes{
   static AppBarTheme get pianoTheme{
     return  AppBarTheme(
         color: Colors.transparent,
+        actionsIconTheme: IconThemeData(color: pianoPrimaryColor),
+        iconTheme: IconThemeData(color: pianoPrimaryColor),
         textTheme: TextThemes.pianoTheme,
     );
   }
@@ -57,7 +59,7 @@ class TextThemes{
     return TextTheme(
         display1: TextStyle(color: pianoBackgroundColor, fontSize: 22, fontWeight: FontWeight.w600),
         display2: TextStyle(color: pianoPrimaryColor, fontSize: 22, fontWeight: FontWeight.w600),
-        title: TextStyle(color: pianoAccentColor, fontSize: 20),
+        title: TextStyle(color: pianoAccentColor, fontSize: 20, fontWeight: FontWeight.w600),
 
     );
   }
