@@ -4,14 +4,12 @@ import 'package:flutter/foundation.dart';
 import 'package:scales_app/blocs/notes_bloc/bloc.dart';
 import 'package:scales_app/blocs/scales_bloc/scales_repository.dart';
 import 'package:scales_app/data_providers/scales_data_provider/scales_basic_provider.dart';
-import 'package:scales_app/models/Note.dart';
 import 'package:scales_app/models/Scale.dart';
 import 'bloc.dart';
 
 class ScalesBloc extends Bloc<ScalesEvent, ScalesState> {
   final NotesBloc _notesBloc;
   StreamSubscription _notesSubscription;
-  StreamSubscription _scalesSubscription;
   final ScalesRepository _scalesRepository = ScalesRepository(provider: ScalesBasicProvider());
 
   ScalesBloc(
@@ -25,20 +23,7 @@ class ScalesBloc extends Bloc<ScalesEvent, ScalesState> {
   }
 
   @override
-  ScalesState get initialState {
-    initialize();
-    return ScalesLoaded(scales: List<Scale>());
-  }
-
-  initialize() {
-    _scalesSubscription?.cancel();
-//    _scalesSubscription = _scalesRepository.scales().listen(
-//          (scales) {
-//            print("Got new scales...");
-//            add(ScalesUpdated(scales: scales));
-//          },
-//        );
-  }
+  ScalesState get initialState => ScalesLoaded(scales: List<Scale>());
 
   @override
   Stream<ScalesState> mapEventToState(
@@ -56,7 +41,6 @@ class ScalesBloc extends Bloc<ScalesEvent, ScalesState> {
   @override
   Future<void> close() {
     _notesSubscription?.cancel();
-    _scalesSubscription?.cancel();
     return super.close();
   }
 }

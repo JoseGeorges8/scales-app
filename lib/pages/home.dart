@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scales_app/bloc_providers/scales_bloc_provider.dart';
 import 'package:scales_app/blocs/notes_bloc/bloc.dart';
 import 'package:scales_app/pages/settings.dart';
-import 'package:scales_app/utils/constants.dart';
+import 'package:scales_app/widgets/clear_button.dart';
 import 'package:scales_app/widgets/draggable_scales_sheet.dart';
 import 'package:scales_app/widgets/home_app_bar.dart';
 import 'package:scales_app/widgets/note_button_group.dart';
@@ -51,6 +51,7 @@ class _HomePageState extends State<HomePage>
                 );
         }),
       ),
+      floatingActionButton: ClearButton(onPressed: () => _notesBloc.clearNotes()),
     );
   }
 

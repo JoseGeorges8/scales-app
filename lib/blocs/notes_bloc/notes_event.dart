@@ -20,3 +20,13 @@ class UpdateNote extends NotesEvent {
   @override
   String toString() => 'UpdateNote { updatedNote: $updatedNote }';
 }
+
+
+class ClearNotes extends NotesEvent {
+
+  @override
+  List<Object> get props => [];
+
+  @override
+  String toString() => 'ClearNotes';
+}

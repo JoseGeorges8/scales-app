@@ -16,8 +16,8 @@ class FlutterMidiSoundProvider extends SoundBaseProvider {
   // ignore: missing_return
   Future<void> initialize() {
     FlutterMidi.unmute();
-    rootBundle.load("assets/sounds/synth.sf2").then((sf2) {
-      FlutterMidi.prepare(sf2: sf2, name: "synth.sf2");
+    rootBundle.load("assets/sounds/Piano.sf2").then((sf2) {
+      FlutterMidi.prepare(sf2: sf2, name: "Piano.sf2");
     });
   }
 

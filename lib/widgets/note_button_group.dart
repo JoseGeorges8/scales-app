@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_midi/flutter_midi.dart';
 import 'package:scales_app/blocs/notes_bloc/bloc.dart';
 import 'package:scales_app/blocs/sound_bloc/bloc.dart';
 import 'package:scales_app/blocs/theme_bloc/bloc.dart';
@@ -73,13 +72,12 @@ class NotesButtonGroup extends StatelessWidget{
 
 
     return BlocBuilder<ThemeBloc, ThemeState>(
-      builder: (BuildContext context, ThemeState state)=> _getButtonGroup(state.value),
+      builder: (BuildContext context, ThemeState state) => _getButtonGroup(state.value),
     );
   }
 
   _onNotePressed(Note note){
-    final Note updatedNote = note.copyWith(isSharp: note.isSharp, value: note.value, isSelected: !note.isSelected, midi: note.midi);
-    notesBloc.add(UpdateNote(updatedNote));
+    notesBloc.add(UpdateNote(note));
     soundBloc.playNote(note);
   }
 
