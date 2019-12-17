@@ -14,72 +14,84 @@ class NotesButtonGroup extends StatelessWidget{
   NotesBloc notesBloc;
   SoundBloc soundBloc;
 
-  NotesButtonGroup({Key key, @required this.notes, this.notesBloc})
+  NotesButtonGroup({Key key, @required this.notes})
       : assert (notes != null),
        assert (notes.length == 12),
-       assert (notesBloc != null),
         super(key: key);
-
-
-  @override
-  Widget build(BuildContext context) {
-    soundBloc = BlocProvider.of<SoundBloc>(context);
-
-    _buildPianoGroup(){
-      return Container(
-        child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: notes
-                .map((note) => PianoButton(
-              note: note,
-              onTap: () => _onNotePressed(note),
-            ))
-                .toList()),
-      );
-    }
-
-    _buildDrumpadGroup(){
-      return Card(
-        child: GridView.count(
-            shrinkWrap: true,
-            scrollDirection: Axis.vertical,
-            crossAxisCount: 4,
-            children: notes
-                .map((note) => Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: DrumpadButton(
-                note: note,
-                onTap: () => _onNotePressed(note),
-              ),
-            ))
-                .toList()),
-      );
-    }
-
-    _getButtonGroup(String value) {
-      switch (value){
-        case PIANO_THEME_OPTION:
-          return _buildPianoGroup();
-          break;
-        case DRUMPAD_THEME_OPTION:
-          return _buildDrumpadGroup();
-          break;
-        default:
-          return _buildPianoGroup();
-          break;
-      }
-    }
-
-
-    return BlocBuilder<ThemeBloc, ThemeState>(
-      builder: (BuildContext context, ThemeState state) => _getButtonGroup(state.value),
-    );
-  }
 
   _onNotePressed(Note note){
     notesBloc.add(UpdateNote(note));
     soundBloc.playNote(note);
   }
+
+  @override
+  Widget build(BuildContext context) {
+    soundBloc = BlocProvider.of<SoundBloc>(context);
+    notesBloc = BlocProvider.of<NotesBloc>(context);
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (BuildContext context, ThemeState state) => _getButtonGroup(state.value),);
+  }
+
+
+  _buildPianoGroup(){
+    return Container(
+      height: 300,
+      child: ListView(
+        shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          children: notes
+              .map((note) => Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: PianoButton(
+            note: note,
+            onTap: () => _onNotePressed(note),
+          ),
+              ))
+              .toList()),
+    );
+  }
+
+  _buildPianoTilesRow(List<Note> notes){
+
+    return Row(
+      children: <Widget>[
+
+      ],
+    );
+  }
+
+  _buildDrumpadGroup(){
+    return Card(
+      child: GridView.count(
+          shrinkWrap: true,
+          scrollDirection: Axis.vertical,
+          crossAxisCount: 4,
+          children: notes
+              .map((note) => Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: DrumpadButton(
+              note: note,
+              onTap: () => _onNotePressed(note),
+            ),
+          ))
+              .toList()),
+    );
+  }
+
+  _getButtonGroup(String value) {
+    switch (value){
+      case PIANO_THEME_OPTION:
+        return _buildPianoGroup();
+        break;
+      case DRUMPAD_THEME_OPTION:
+        return _buildDrumpadGroup();
+        break;
+      default:
+        return _buildPianoGroup();
+        break;
+    }
+  }
+
+
 
 }
 

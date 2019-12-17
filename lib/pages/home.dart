@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage>
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: NotesButtonGroup(notesBloc: _notesBloc, notes: state.notes),
+                        child: NotesButtonGroup(notes: state.notes),
                       ),
                       DraggableScalesSheet()
                     ],

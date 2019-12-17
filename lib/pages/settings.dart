@@ -6,6 +6,7 @@ import 'package:scales_app/utils/constants.dart';
 import 'package:scales_app/utils/themes.dart';
 import 'package:scales_app/widgets/home_app_bar.dart';
 import 'package:scales_app/widgets/settings_row.dart';
+import 'package:scales_app/widgets/texts.dart';
 
 class SettingsPage extends StatefulWidget{
 
@@ -31,15 +32,27 @@ class _SettingsPageState extends State<SettingsPage> {
       appBar: HomeAppBar(
         title: SETTINGS_TITLE,
       ),
-      body: ListView.builder(
-          itemCount: appThemeData.length,
-          itemBuilder: (BuildContext context, int index){
-            return SettingsRow(
-              isSelected: _themeBloc.currentTheme == _themeBloc.themes[index],
-              title: _themeBloc.themes[index],
-              onRowPressed: () => _onSettingsRowPressed(_themeBloc.themes[index]),
-            );
-          }
+      body: Column(
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              ListHeadingText('Themes'),
+            ],
+          ),
+          Column(
+            children: _themeBloc.themes.map((theme) => SettingsRow(
+              onRowPressed: () => _onSettingsRowPressed(theme),
+              title: theme,
+              isSelected: _themeBloc.currentTheme == theme,
+
+            )).toList(),
+          ),
+          Row(
+            children: <Widget>[
+              ListHeadingText('Sounds'),
+            ],
+          ),
+        ],
       ),
     );
   }

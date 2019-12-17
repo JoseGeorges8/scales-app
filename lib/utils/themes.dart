@@ -4,7 +4,7 @@ import 'constants.dart';
 
 final appThemeData = {
   PIANO_THEME_OPTION: AppThemes.pianoTheme,
-  DRUMPAD_THEME_OPTION: AppThemes.drumpadTheme
+  DRUMPAD_THEME_OPTION: AppThemes.drumpadTheme,
 };
 
 class AppThemes {
@@ -55,11 +55,14 @@ class TextThemes{
 
   static TextTheme get pianoTheme{
     return TextTheme(
-        title: TextStyle(color: pianoAccentColor, fontSize: 20)
+        display1: TextStyle(color: pianoAccentColor, fontSize: 20),
+        title: TextStyle(color: pianoAccentColor, fontSize: 20),
+
     );
   }
   static TextTheme get drumpadTheme{
     return TextTheme(
+        display1:  TextStyle(color: drumpadAccentColor, fontSize: 20),
         title: TextStyle(color: drumpadAccentColor, fontSize: 20)
     );
   }
