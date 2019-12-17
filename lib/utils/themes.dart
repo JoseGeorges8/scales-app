@@ -55,7 +55,8 @@ class TextThemes{
 
   static TextTheme get pianoTheme{
     return TextTheme(
-        display1: TextStyle(color: pianoAccentColor, fontSize: 20),
+        display1: TextStyle(color: pianoBackgroundColor, fontSize: 22, fontWeight: FontWeight.w600),
+        display2: TextStyle(color: pianoPrimaryColor, fontSize: 22, fontWeight: FontWeight.w600),
         title: TextStyle(color: pianoAccentColor, fontSize: 20),
 
     );

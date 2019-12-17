@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scales_app/blocs/scales_bloc/bloc.dart';
+import 'package:scales_app/widgets/texts.dart';
 
 class DraggableScalesSheet extends StatefulWidget{
 
@@ -37,15 +38,15 @@ class DraggableScalesSheetState extends State<DraggableScalesSheet> with SingleT
           child: DraggableScrollableSheet(
             builder: (BuildContext context, ScrollController scrollController) {
               return Container(
-                decoration: BoxDecoration(borderRadius: BorderRadius.vertical(top: Radius.circular(24)), color: Theme.of(context).accentColor),
+                decoration: BoxDecoration(borderRadius: BorderRadius.vertical(top: Radius.circular(24)), color: Theme.of(context).primaryColor),
                 child: Column(
                   children: <Widget>[
                     SingleChildScrollView(
                         child: Row(
                           children: <Widget>[
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text('Scales found'),
+                              padding: const EdgeInsets.all(16.0),
+                              child: Text('Scales Found', style: Theme.of(context).textTheme.display1),
                             ),
                           ],
                           mainAxisAlignment: MainAxisAlignment.center,

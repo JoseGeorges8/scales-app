@@ -12,6 +12,6 @@ class ListHeadingText extends StatelessWidget{
   @override
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
-    child: Text(text, style: Theme.of(context).textTheme.display1),
+    child: Text(text, style: Theme.of(context).textTheme.display2),
   );
 }
