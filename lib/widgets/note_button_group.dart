@@ -8,18 +8,17 @@ import 'package:scales_app/utils/constants.dart';
 
 import 'note_button.dart';
 
-class NotesButtonGroup extends StatelessWidget{
-
+class NotesButtonGroup extends StatelessWidget {
   final List<Note> notes;
   NotesBloc notesBloc;
   SoundBloc soundBloc;
 
   NotesButtonGroup({Key key, @required this.notes})
-      : assert (notes != null),
-       assert (notes.length == 12),
+      : assert(notes != null),
+        assert(notes.length == 12),
         super(key: key);
 
-  _onNotePressed(Note note){
+  _onNotePressed(Note note) {
     notesBloc.add(UpdateNote(note));
     soundBloc.playNote(note);
   }
@@ -28,38 +27,40 @@ class NotesButtonGroup extends StatelessWidget{
   Widget build(BuildContext context) {
     soundBloc = BlocProvider.of<SoundBloc>(context);
     notesBloc = BlocProvider.of<NotesBloc>(context);
-    return BlocBuilder<ThemeBloc, ThemeState>(builder: (BuildContext context, ThemeState state) => _getButtonGroup(state.value),);
-  }
-
-
-  _buildPianoGroup(){
-    return Container(
-      height: 300,
-      child: ListView(
-        shrinkWrap: true,
-          scrollDirection: Axis.horizontal,
-          children: notes
-              .map((note) => Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: PianoButton(
-            note: note,
-            onTap: () => _onNotePressed(note),
-          ),
-              ))
-              .toList()),
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (BuildContext context, ThemeState state) =>
+          _getButtonGroup(state.value),
     );
   }
 
-  _buildPianoTilesRow(List<Note> notes){
+  _buildPianoGroup() {
+    return Column(
+      //This builds the exact order I wanted for the notes to be displayed
+      //Remember that this is depending on the order of the array (Which currently comes exacly from the notes_basic_provider.dart file)
+        children: [
+          _buildPianoTilesRow([notes[1], notes[3]]),
+          _buildPianoTilesRow([notes[0], notes[2], notes[4]]),
+          _buildPianoTilesRow([notes[6], notes[8], notes[10]]),
+          _buildPianoTilesRow([notes[5], notes[7], notes[9], notes[11]]),
+          ],
+    );
+  }
 
+  _buildPianoTilesRow(List<Note> notes) {
     return Row(
-      children: <Widget>[
-
-      ],
-    );
+      mainAxisAlignment: MainAxisAlignment.center,
+        children: notes
+            .map((note) => Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: PianoButton(
+                    note: note,
+                    onTap: () => _onNotePressed(note),
+                  ),
+                ))
+            .toList());
   }
 
-  _buildDrumpadGroup(){
+  _buildDrumpadGroup() {
     return Card(
       child: GridView.count(
           shrinkWrap: true,
@@ -67,18 +68,18 @@ class NotesButtonGroup extends StatelessWidget{
           crossAxisCount: 4,
           children: notes
               .map((note) => Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: DrumpadButton(
-              note: note,
-              onTap: () => _onNotePressed(note),
-            ),
-          ))
+                    padding: const EdgeInsets.all(8.0),
+                    child: DrumpadButton(
+                      note: note,
+                      onTap: () => _onNotePressed(note),
+                    ),
+                  ))
               .toList()),
     );
   }
 
   _getButtonGroup(String value) {
-    switch (value){
+    switch (value) {
       case PIANO_THEME_OPTION:
         return _buildPianoGroup();
         break;
@@ -90,8 +91,4 @@ class NotesButtonGroup extends StatelessWidget{
         break;
     }
   }
-
-
-
 }
-

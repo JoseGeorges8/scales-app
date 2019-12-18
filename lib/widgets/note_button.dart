@@ -11,14 +11,15 @@ class PianoButton extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      elevation: 4,
-      onPressed: onTap,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
+    return ButtonTheme(
+      minWidth: 20,
+      height: 60,
+      child: RaisedButton(
+        elevation: 4,
+        onPressed: onTap,
         child: Align(alignment: Alignment.bottomLeft,child: Text(note.value, style: TextStyle(color: note.isSharp ? Colors.white : Colors.black),)),
+        color: note.isSharp ? note.isSelected ? Colors.black.withOpacity(.5) : Colors.black : note.isSelected ? Colors.white.withOpacity(.5) : Colors.white,
       ),
-      color: note.isSharp ? note.isSelected ? Colors.black.withOpacity(.5) : Colors.black : note.isSelected ? Colors.white.withOpacity(.5) : Colors.white,
     );
   }
 
