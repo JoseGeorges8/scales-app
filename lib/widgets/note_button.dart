@@ -15,10 +15,14 @@ class PianoButton extends StatelessWidget{
       minWidth: 20,
       height: 60,
       child: RaisedButton(
-        elevation: 4,
+        shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(8.0),
+          side: note.isSelected ? BorderSide(color: Theme.of(context).accentColor) :BorderSide(color: Colors.transparent)
+        ),
+        elevation: note.isSelected ? 0 : 4,
         onPressed: onTap,
         child: Align(alignment: Alignment.bottomLeft,child: Text(note.value, style: TextStyle(color: note.isSharp ? Colors.white : Colors.black),)),
-        color: note.isSharp ? note.isSelected ? Colors.black.withOpacity(.5) : Colors.black : note.isSelected ? Colors.white.withOpacity(.5) : Colors.white,
+        color: note.isSharp ? note.isSelected ? Colors.black.withOpacity(.5) : Colors.black : Colors.white,
       ),
     );
   }

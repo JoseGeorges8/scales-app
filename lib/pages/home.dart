@@ -35,22 +35,22 @@ class _HomePageState extends State<HomePage>
                   builder: (BuildContext context) => SettingsPage())))
         ],
       ),
-      body: ScalesBlocProvider(
-        child: BlocBuilder<NotesBloc, NotesState>(
-            builder: (BuildContext context, NotesState state) {
-                return SizedBox.expand(
-                  child: Stack(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: NotesButtonGroup(notes: state.notes),
-                      ),
-                      DraggableScalesSheet()
-                    ],
-                  ),
-                );
-        }),
-      ),
+      body: BlocBuilder<NotesBloc, NotesState>(
+          builder: (BuildContext context, NotesState state) {
+              return SizedBox.expand(
+                child: Stack(
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        NotesButtonGroup(notes: state.notes),
+                        Divider(),
+                      ],
+                    ),
+                    ScalesBlocProvider(child: DraggableScalesSheet())
+                  ],
+                ),
+              );
+      }),
       floatingActionButton: ClearButton(onPressed: () => _notesBloc.clearNotes()),
     );
   }
