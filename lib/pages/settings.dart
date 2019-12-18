@@ -41,7 +41,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           Column(
             children: _themeBloc.themes.map((theme) => SettingsRow(
-              onRowPressed: () => _onSettingsRowPressed(theme),
+              onRowPressed: () => _onThemeRowPressed(theme),
               title: theme,
               isSelected: _themeBloc.currentTheme == theme,
 
@@ -52,12 +52,19 @@ class _SettingsPageState extends State<SettingsPage> {
               ListHeadingText('Sounds'),
             ],
           ),
+          Column(
+            children: _soundBloc.sounds.map((sound) => SettingsRow(
+              onRowPressed: () => _onSoundsRowPressed(sound),
+              title: sound,
+              isSelected: _soundBloc.currentSound == sound,
+            )).toList(),
+          ),
         ],
       ),
     );
   }
 
-  _onSettingsRowPressed(String theme) {
+  _onThemeRowPressed(String theme) {
      _themeBloc.add(AppThemeChanged(theme: theme));
   }
 

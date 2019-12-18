@@ -6,9 +6,16 @@ import './bloc.dart';
 
 class SoundBloc extends Bloc<SoundEvent, SoundState> {
 
+  List<String> sounds = List<String>();
+  String currentSound;
+
   final FlutterMidiSoundProvider soundProvider = FlutterMidiSoundProvider();
 
-  _initialize() => soundProvider.initialize();
+  _initialize() async {
+    sounds = soundProvider.getSounds();
+    currentSound = await soundProvider.getCurrentSound();
+    await soundProvider.initialize();
+  }
   @override
   SoundState get initialState {
     _initialize();

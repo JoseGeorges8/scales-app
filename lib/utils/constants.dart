@@ -12,8 +12,6 @@ const String DRUMPAD_THEME_OPTION = 'Drumpad';
 ///Sound options
 const String SOUND_KEY = 'sound';
 const String PIANO_SOUND_OPTION = 'Piano';
-const String DRUMPAD_SOUND_OPTION = 'Drumpad';
-const String BASS_SOUND_OPTION = 'Bass';
 const String SYNTH_SOUND_OPTION = 'Synth';
 
 ///Theme Colors
