@@ -19,16 +19,19 @@ class SoundBloc extends Bloc<SoundEvent, SoundState> {
   @override
   SoundState get initialState {
     _initialize();
-    return InitialSoundState();
+    return SoundState.initial();
   }
 
   playNote(Note note) => soundProvider.playNote(note);
-  changeSound(String sound) => soundProvider.changeSound(sound);
 
   @override
   Stream<SoundState> mapEventToState(
     SoundEvent event,
   ) async* {
-    // TODO: Add Logic
+    if (event is AppSoundChanged){
+      currentSound = event.sound;
+      soundProvider.changeSound(event.sound);
+      yield SoundState(value: currentSound);
+    }
   }
 }

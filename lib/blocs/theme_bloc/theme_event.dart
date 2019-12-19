@@ -25,9 +25,3 @@ class AppThemeChanged extends ThemeEvent {
   @override
   List<Object> get props => [theme];
 }
-
-class AppSoundChanged extends ThemeEvent {
-
-  @override
-  List<Object> get props => [];
-}

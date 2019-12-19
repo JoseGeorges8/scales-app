@@ -66,6 +66,7 @@ class TextThemes{
   static TextTheme get drumpadTheme{
     return TextTheme(
         display1:  TextStyle(color: drumpadAccentColor, fontSize: 20),
+        display2: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w600),
         title: TextStyle(color: drumpadAccentColor, fontSize: 20)
     );
   }

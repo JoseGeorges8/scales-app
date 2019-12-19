@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scales_app/blocs/sound_bloc/bloc.dart';
 import 'package:scales_app/blocs/theme_bloc/bloc.dart';
 import 'package:scales_app/utils/constants.dart';
-import 'package:scales_app/utils/themes.dart';
 import 'package:scales_app/widgets/home_app_bar.dart';
 import 'package:scales_app/widgets/settings_row.dart';
 import 'package:scales_app/widgets/texts.dart';
@@ -69,6 +68,6 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   _onSoundsRowPressed(String sound){
-     _soundBloc.changeSound(sound);
+     _soundBloc.add(AppSoundChanged(sound: sound));
   }
 }

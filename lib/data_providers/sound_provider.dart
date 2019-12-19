@@ -46,12 +46,14 @@ class FlutterMidiSoundProvider extends SoundBaseProvider {
   }
 
   @override
-  List<String> getSounds() => [PIANO_SOUND_OPTION, SYNTH_SOUND_OPTION];
+  List<String> getSounds() => [PIANO_SOUND_OPTION];
 
   @override
   Future<String> getCurrentSound() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getString(SOUND_KEY);
+    final String sound = sharedPreferences.getString(SOUND_KEY);
+    if (sound == null) sharedPreferences.setString(SOUND_KEY, PIANO_SOUND_OPTION);
+    return sound ?? PIANO_SOUND_OPTION;
   }
 
 }
