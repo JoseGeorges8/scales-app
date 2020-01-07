@@ -25,18 +25,18 @@ class Note extends Equatable{
     this.isSelected = false,
   });
 
-  factory Note.C() => Note(value: 'C', isSharp: false, midi: 60);
-  factory Note.dFlat() => Note(value: 'D♭', isSharp: true, midi: 61);
-  factory Note.D() => Note(value: 'D', isSharp: false, midi: 62);
-  factory Note.eFlat() => Note(value: 'E♭', isSharp: true, midi: 63);
-  factory Note.E() => Note(value: 'E', isSharp: false, midi: 64);
-  factory Note.F() => Note(value: 'F', isSharp: false, midi: 65);
-  factory Note.gFlat() => Note(value: 'G♭', isSharp: true, midi: 66);
-  factory Note.G() => Note(value: 'G', isSharp: false, midi: 67);
-  factory Note.aFlat() => Note(value: 'A♭', isSharp: true, midi: 68);
-  factory Note.A() => Note(value: 'A', isSharp: false, midi: 69);
-  factory Note.bFlat() => Note(value: 'B♭', isSharp: true, midi: 70);
-  factory Note.B() => Note(value: 'B', isSharp: false, midi: 71);
+  factory Note.C({isSelected = false}) => Note(value: 'C', isSharp: false, midi: 60, isSelected: isSelected);
+  factory Note.dFlat({isSelected = false}) => Note(value: 'D♭', isSharp: true, midi: 61, isSelected: isSelected);
+  factory Note.D({isSelected = false}) => Note(value: 'D', isSharp: false, midi: 62, isSelected: isSelected);
+  factory Note.eFlat({isSelected = false}) => Note(value: 'E♭', isSharp: true, midi: 63, isSelected: isSelected);
+  factory Note.E({isSelected = false}) => Note(value: 'E', isSharp: false, midi: 64, isSelected: isSelected);
+  factory Note.F({isSelected = false}) => Note(value: 'F', isSharp: false, midi: 65, isSelected: isSelected);
+  factory Note.gFlat({isSelected = false}) => Note(value: 'G♭', isSharp: true, midi: 66, isSelected: isSelected);
+  factory Note.G({isSelected = false}) => Note(value: 'G', isSharp: false, midi: 67, isSelected: isSelected);
+  factory Note.aFlat({isSelected = false}) => Note(value: 'A♭', isSharp: true, midi: 68, isSelected: isSelected);
+  factory Note.A({isSelected = false}) => Note(value: 'A', isSharp: false, midi: 69, isSelected: isSelected);
+  factory Note.bFlat({isSelected = false}) => Note(value: 'B♭', isSharp: true, midi: 70, isSelected: isSelected);
+  factory Note.B({isSelected = false}) => Note(value: 'B', isSharp: false, midi: 71, isSelected: isSelected);
 
   Note copyWith({
     String value,
