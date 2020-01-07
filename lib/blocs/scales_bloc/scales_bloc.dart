@@ -22,6 +22,8 @@ class ScalesBloc extends Bloc<ScalesEvent, ScalesState> {
     });
   }
 
+  selectScale(Scale scale) => _notesBloc.add(UpdateAllNotes(scale.playableNotes));
+
   @override
   ScalesState get initialState => ScalesLoaded(scales: List<Scale>());
 
