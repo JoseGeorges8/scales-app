@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scales_app/bloc_providers/scales_bloc_provider.dart';
+import 'package:scales_app/blocs/mode_bloc/bloc.dart';
 import 'package:scales_app/blocs/notes_bloc/bloc.dart';
 import 'package:scales_app/blocs/sound_bloc/bloc.dart';
 import 'package:scales_app/pages/settings.dart';
@@ -44,9 +45,11 @@ class _HomePageState extends State<HomePage>
                 child: Stack(
                   children: <Widget>[
                     Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         NotesButtonGroup(notes: state.notes),
                         Divider(),
+                        BottomContainer(),
                       ],
                     ),
                     ScalesBlocProvider(child: DraggableScalesSheet())
@@ -62,4 +65,36 @@ class _HomePageState extends State<HomePage>
     if(_notesBloc.clearNotes()) _soundBloc.playRandomNotes();
   }
 
+}
+
+//todo: move this to its on file when defined properly
+class BottomContainer extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedSwitchModeButton();
+  }
+}
+
+//todo: move this to its on file when defined properly
+class AnimatedSwitchModeButton extends StatefulWidget{
+  @override
+  _AnimatedSwitchModeButtonState createState() => _AnimatedSwitchModeButtonState();
+}
+class _AnimatedSwitchModeButtonState extends State<AnimatedSwitchModeButton> {
+ 
+  ModeBloc _modeBloc;
+
+  @override
+  void initState() {
+    _modeBloc = BlocProvider.of<ModeBloc>(context);
+    super.initState();
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+  
+  
+  _toggleMode() => _modeBloc.toggleMode();
 }

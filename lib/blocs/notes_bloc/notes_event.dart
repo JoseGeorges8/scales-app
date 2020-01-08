@@ -22,6 +22,19 @@ class UpdateNote extends NotesEvent {
 }
 
 
+class UpdateAllNotes extends NotesEvent {
+  final List<Note> notes;
+
+  const UpdateAllNotes(this.notes);
+
+  @override
+  List<Object> get props => [notes];
+
+  @override
+  String toString() => 'UpdateAllNotes { notes: $notes }';
+}
+
+
 class ClearNotes extends NotesEvent {
 
   @override

@@ -30,9 +30,10 @@ class SoundBloc extends Bloc<SoundEvent, SoundState> {
     return soundProvider.playNote(note);
   }
 
+  //todo: will work on this later
   stopSound({bool fully = true}) {
-    _soundStopped = true;
-    soundProvider.stopSound(fully);
+//    _soundStopped = true;
+//    soundProvider.stopSound(fully);
   }
 
   playRandomNotes() {
@@ -43,15 +44,16 @@ class SoundBloc extends Bloc<SoundEvent, SoundState> {
     soundProvider.playNote(Note.A());
   }
 
+  //todo: will work on this later
   playScale(Scale scale) async {
-    this.stopSound();
-    await Future.delayed(new Duration(milliseconds: 500));
-    _soundStopped = false;
-    for(Note note in scale.playableNotes){
-      if(_soundStopped) return;
-      soundProvider.playNote(note);
-      await Future.delayed(new Duration(milliseconds: 500));
-    }
+//    this.stopSound();
+//    await Future.delayed(new Duration(milliseconds: 500));
+//    _soundStopped = false;
+//    for(Note note in scale.playableNotes){
+//      if(_soundStopped) return;
+//      soundProvider.playNote(note);
+//      await Future.delayed(new Duration(milliseconds: 500));
+//    }
   }
 
   @override

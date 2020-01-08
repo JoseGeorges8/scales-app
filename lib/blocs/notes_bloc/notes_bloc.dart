@@ -31,6 +31,8 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
       yield* _mapUpdateNoteToState(event);
     }else if(event is ClearNotes){
       yield* _mapClearNotesToState(event);
+    }else if(event is UpdateAllNotes){
+      yield* _mapUpdateAllNotesToState(event);
     }
   }
 
@@ -67,7 +69,18 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
       updatedNotes.add(updatedNote);
     }
       yield NotesState(notes: updatedNotes);
+  }
+
+  Stream<NotesState> _mapUpdateAllNotesToState(UpdateAllNotes event) async* {
+    selectedNotes.clear();
+    final List<Note> updatedNotes = List<Note>();
+    for(Note note in event.notes) {
+      final Note updatedNote = note.copyWith(isSharp: note.isSharp, value: note.value, isSelected: note.isSelected, midi: note.midi);
+      updatedNotes.add(updatedNote);
     }
+
+    yield NotesState(notes: event.notes);
+  }
 
 }
 
