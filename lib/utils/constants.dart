@@ -20,7 +20,7 @@ const pianoPrimaryColor = Color.fromRGBO(58, 53, 53, 1);
 const pianoAccentColor = Color.fromRGBO(255, 115, 21, 1);
 const pianoBackgroundColor = Color.fromRGBO(238, 238, 238, 1);
 //Drumpad
-const drumpadPrimaryColor = Color.fromRGBO(76, 65, 65, 1);
-const drumpadAccentColor = Color.fromRGBO(254, 52, 110, 1);
-const drumpadCardColor = Color.fromRGBO(178, 31, 102, 1);
-const drumpadBackgroundColor = Color.fromRGBO(17, 29, 94, 1);
+const drumpadPrimaryColor = Color.fromRGBO(238, 238, 238, 1);
+const drumpadAccentColor = Color.fromRGBO(255, 115, 21, 1);
+const drumpadCardColor = Color.fromRGBO(238, 238, 238, 1);
+const drumpadBackgroundColor = Color.fromRGBO(58, 53, 53, 1);

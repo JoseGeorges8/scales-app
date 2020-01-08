@@ -61,20 +61,27 @@ class NotesButtonGroup extends StatelessWidget {
   }
 
   _buildDrumpadGroup() {
-    return Card(
-      child: GridView.count(
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          crossAxisCount: 4,
-          children: notes
-              .map((note) => Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: DrumpadButton(
-                      note: note,
-                      onTap: () => _onNotePressed(note),
-                    ),
-                  ))
-              .toList()),
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Card(
+        elevation: 8,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GridView.count(
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              crossAxisCount: 4,
+              children: notes
+                  .map((note) => Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: DrumpadButton(
+                          note: note,
+                          onTap: () => _onNotePressed(note),
+                        ),
+                      ))
+                  .toList()),
+        ),
+      ),
     );
   }
 

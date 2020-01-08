@@ -6,19 +6,23 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
+import 'Note.dart';
+
 Scale scaleFromJson(String str) => Scale.fromMap(json.decode(str));
 
 String scaleToJson(Scale data) => json.encode(data.toMap());
 
 class Scale {
-  String root;
-  String type;
-  List<String> notes;
+  final String root;
+  final String type;
+  final List<String> notes;
+  final List<Note> playableNotes;
 
   Scale({
     @required this.root,
     @required this.type,
     @required this.notes,
+    this.playableNotes = const [],
   });
 
   factory Scale.fromMap(Map<String, dynamic> json) => Scale(

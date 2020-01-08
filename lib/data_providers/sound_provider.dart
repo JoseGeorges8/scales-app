@@ -8,6 +8,7 @@ abstract class SoundBaseProvider{
 
   Future<void> initialize();
   Future<void> playNote(Note note);
+  Future<void> stopSound(bool fully);
   Future<void> changeSound(String sound);
   List<String> getSounds();
   Future<String> getCurrentSound();
@@ -31,7 +32,9 @@ class FlutterMidiSoundProvider extends SoundBaseProvider {
   }
 
   @override
-  Future<void> playNote(Note note) => FlutterMidi.playMidiNote(midi: note.midi);
+  Future<void> playNote(Note note) {
+    return FlutterMidi.playMidiNote(midi: note.midi);
+  }
 
   @override
   // ignore: missing_return
@@ -55,5 +58,8 @@ class FlutterMidiSoundProvider extends SoundBaseProvider {
     if (sound == null) sharedPreferences.setString(SOUND_KEY, PIANO_SOUND_OPTION);
     return sound ?? PIANO_SOUND_OPTION;
   }
+
+  @override
+  Future<void> stopSound(bool fully) => FlutterMidi.stopSound(fully: fully);
 
 }

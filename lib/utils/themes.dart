@@ -46,6 +46,8 @@ class AppBarThemes{
   static AppBarTheme get drumpadTheme{
     return  AppBarTheme(
         color: Colors.transparent,
+        actionsIconTheme: IconThemeData(color: drumpadPrimaryColor),
+        iconTheme: IconThemeData(color: drumpadPrimaryColor),
         textTheme: TextThemes.drumpadTheme
     );
   }
@@ -65,9 +67,9 @@ class TextThemes{
   }
   static TextTheme get drumpadTheme{
     return TextTheme(
-        display1:  TextStyle(color: drumpadAccentColor, fontSize: 20),
-        display2: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w600),
-        title: TextStyle(color: drumpadAccentColor, fontSize: 20)
+        display1:  TextStyle(color: drumpadBackgroundColor, fontSize: 22, fontWeight: FontWeight.w600),
+        display2: TextStyle(color: drumpadPrimaryColor, fontSize: 22, fontWeight: FontWeight.w600),
+        title: TextStyle(color: drumpadAccentColor, fontSize: 20, fontWeight: FontWeight.w600)
     );
   }
 

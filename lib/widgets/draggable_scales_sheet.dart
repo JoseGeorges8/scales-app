@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scales_app/blocs/scales_bloc/bloc.dart';
+import 'package:scales_app/blocs/sound_bloc/bloc.dart';
+import 'package:scales_app/models/Scale.dart';
 import 'package:scales_app/widgets/texts.dart';
 
 class DraggableScalesSheet extends StatefulWidget{
@@ -32,53 +34,56 @@ class DraggableScalesSheetState extends State<DraggableScalesSheet> with SingleT
           else if (state.scales.isEmpty) _controller.reverse();
         }
       },
-      child: SizedBox.expand(
-        child: SlideTransition(
-          position: _tween.animate(_controller),
-          child: DraggableScrollableSheet(
-            builder: (BuildContext context, ScrollController scrollController) {
-              return Container(
-                decoration: BoxDecoration(borderRadius: BorderRadius.vertical(top: Radius.circular(24)), color: Theme.of(context).primaryColor),
-                child: Column(
-                  children: <Widget>[
-                    SingleChildScrollView(
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Text('Scales Found', style: Theme.of(context).textTheme.display1),
-                            ),
-                          ],
-                          mainAxisAlignment: MainAxisAlignment.center,
-                        ),
-                        physics: ClampingScrollPhysics(),
-                        controller: scrollController),
-                    BlocBuilder<ScalesBloc, ScalesState>(
-                        builder: (BuildContext context, ScalesState state) {
+      child: SlideTransition(
+        position: _tween.animate(_controller),
+        child: DraggableScrollableSheet(
+          builder: (BuildContext context, ScrollController scrollController) {
+            return Container(
+              decoration: BoxDecoration(borderRadius: BorderRadius.vertical(top: Radius.circular(24)), color: Theme.of(context).primaryColor),
+              child: Column(
+                children: <Widget>[
+                  SingleChildScrollView(
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Text('Scales Found', style: Theme.of(context).textTheme.display1),
+                          ),
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.center,
+                      ),
+                      physics: ClampingScrollPhysics(),
+                      controller: scrollController
+                  ),
+                  BlocBuilder<ScalesBloc, ScalesState>(
+                      builder: (BuildContext context, ScalesState state) {
 
 
-                          if(state is ScalesLoaded){
-                            return Expanded(
-                              child: ListView.builder(
-                                physics: ClampingScrollPhysics(),
+                        if(state is ScalesLoaded){
+
+                          return Expanded(
+                            child: GridView.count(
                                 controller: scrollController,
-                                itemCount: state.scales.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return ListTile(title: Text(state.scales[index].toString()));
-                                },
-                              ),
-                            );
-                          }
+                                shrinkWrap: true,
+                                scrollDirection: Axis.vertical,
+                                crossAxisCount: 4,
+                                children: state.scales
+                                    .map((scale) => Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: ScaleButton(scale: scale),
+                                )).toList()),
+                          );
 
-                          return Container();
+                        }
 
-                      }
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
+                        return Container();
+
+                    }
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       )
     );
@@ -88,6 +93,24 @@ class DraggableScalesSheetState extends State<DraggableScalesSheet> with SingleT
   void dispose() {
     _controller?.dispose();
     super.dispose();
+  }
+
+}
+
+
+class ScaleButton extends StatelessWidget{
+
+  final Scale scale;
+
+  const ScaleButton({Key key, this.scale}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      color: Theme.of(context).backgroundColor,
+      child: Center(child: Text(scale.root + " " + scale.type, style: TextStyle(color: Theme.of(context).primaryColor))),
+      onPressed: () => BlocProvider.of<SoundBloc>(context).playScale(scale),
+    );
   }
 
 }

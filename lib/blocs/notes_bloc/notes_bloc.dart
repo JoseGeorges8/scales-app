@@ -16,8 +16,11 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
     return NotesState(notes: _notesRepository.getNotes());
   }
 
-  clearNotes(){
+  ///Fires a clear notes event
+  bool clearNotes(){
+    if(selectedNotes.isEmpty) return false;
     add(ClearNotes());
+    return true;
   }
 
   @override
@@ -63,7 +66,6 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
       final Note updatedNote = note.copyWith(isSharp: note.isSharp, value: note.value, isSelected: false, midi: note.midi);
       updatedNotes.add(updatedNote);
     }
-
       yield NotesState(notes: updatedNotes);
     }
 

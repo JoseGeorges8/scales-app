@@ -25,18 +25,18 @@ class Note extends Equatable{
     this.isSelected = false,
   });
 
-  factory Note.C() => Note(value: 'C', isSharp: false, midi: 60);
-  factory Note.dFlat() => Note(value: 'D♭', isSharp: true, midi: 61);
-  factory Note.D() => Note(value: 'D', isSharp: false, midi: 62);
-  factory Note.eFlat() => Note(value: 'E♭', isSharp: true, midi: 63);
-  factory Note.E() => Note(value: 'E', isSharp: false, midi: 64);
-  factory Note.F() => Note(value: 'F', isSharp: false, midi: 65);
-  factory Note.gFlat() => Note(value: 'G♭', isSharp: true, midi: 66);
-  factory Note.G() => Note(value: 'G', isSharp: false, midi: 67);
-  factory Note.aFlat() => Note(value: 'A♭', isSharp: true, midi: 68);
-  factory Note.A() => Note(value: 'A', isSharp: false, midi: 69);
-  factory Note.bFlat() => Note(value: 'B♭', isSharp: true, midi: 70);
-  factory Note.B() => Note(value: 'B', isSharp: false, midi: 71);
+  factory Note.C({int midi = 60}) => Note(value: 'C', isSharp: false, midi: midi);
+  factory Note.dFlat({int midi = 61}) => Note(value: 'D♭', isSharp: true, midi: midi);
+  factory Note.D({int midi = 62}) => Note(value: 'D', isSharp: false, midi: midi);
+  factory Note.eFlat({int midi = 63}) => Note(value: 'E♭', isSharp: true, midi: midi);
+  factory Note.E({int midi = 64}) => Note(value: 'E', isSharp: false, midi: midi);
+  factory Note.F({int midi = 65}) => Note(value: 'F', isSharp: false, midi: midi);
+  factory Note.gFlat({int midi = 66}) => Note(value: 'G♭', isSharp: true, midi: midi);
+  factory Note.G({int midi = 67}) => Note(value: 'G', isSharp: false, midi: midi);
+  factory Note.aFlat({int midi = 68}) => Note(value: 'A♭', isSharp: true, midi: midi);
+  factory Note.A({int midi = 69}) => Note(value: 'A', isSharp: false, midi: midi);
+  factory Note.bFlat({int midi = 70}) => Note(value: 'B♭', isSharp: true, midi: midi);
+  factory Note.B({int midi = 71}) => Note(value: 'B', isSharp: false, midi: midi);
 
   Note copyWith({
     String value,
