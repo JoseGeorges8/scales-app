@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scales_app/blocs/mode_bloc/bloc.dart';
 import 'package:scales_app/blocs/notes_bloc/bloc.dart';
 import 'package:scales_app/blocs/sound_bloc/bloc.dart';
 import 'package:scales_app/blocs/theme_bloc/bloc.dart';
@@ -19,7 +20,7 @@ class NotesButtonGroup extends StatelessWidget {
         super(key: key);
 
   _onNotePressed(Note note) {
-    notesBloc.add(UpdateNote(note));
+    notesBloc.updateNote(note);
     soundBloc.playNote(note);
   }
 
@@ -28,8 +29,7 @@ class NotesButtonGroup extends StatelessWidget {
     soundBloc = BlocProvider.of<SoundBloc>(context);
     notesBloc = BlocProvider.of<NotesBloc>(context);
     return BlocBuilder<ThemeBloc, ThemeState>(
-      builder: (BuildContext context, ThemeState state) =>
-          _getButtonGroup(state.value),
+      builder: (BuildContext context, ThemeState state) => _getButtonGroup(state.value),
     );
   }
 

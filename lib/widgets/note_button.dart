@@ -20,7 +20,7 @@ class PianoButton extends StatelessWidget {
                 ? BorderSide(color: Theme.of(context).accentColor)
                 : BorderSide(color: Colors.transparent)),
         elevation: note.isSelected ? 0 : 4,
-        onPressed: onTap,
+        onPressed: note.isDisabled ? null : onTap,
         child: Align(
             alignment: Alignment.bottomLeft,
             child: Text(
@@ -49,7 +49,7 @@ class DrumpadButton extends StatelessWidget {
         RaisedButton(
           color: Theme.of(context).backgroundColor,
           child: Center(child: Text(note.value, style: TextStyle(color: Theme.of(context).primaryColor))),
-          onPressed: onTap,
+          onPressed: note.isDisabled ? null : onTap,
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),

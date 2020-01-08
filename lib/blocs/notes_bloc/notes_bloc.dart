@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:flutter/foundation.dart';
+import 'package:scales_app/blocs/mode_bloc/bloc.dart';
 import 'package:scales_app/blocs/notes_bloc/notes_repository.dart';
 import 'package:scales_app/data_providers/notes_data_provider/notes_basic_provider.dart';
 import 'package:scales_app/models/Note.dart';
@@ -7,13 +9,29 @@ import './bloc.dart';
 
 class NotesBloc extends Bloc<NotesEvent, NotesState> {
 
-  final List<String> selectedNotes = List<String>();
+  final ModeBloc _modeBloc;
+  StreamSubscription _modeSubscription;
 
+
+  final List<String> selectedNotes = List<String>();
   final NotesRepository _notesRepository = NotesRepository(provider: NotesBasicProvider());
+
+  NotesBloc({@required modeBloc}) : assert(modeBloc != null), _modeBloc = modeBloc {
+    _modeSubscription = modeBloc.listen((mode){
+
+    });
+  }
 
   @override
   NotesState get initialState {
     return NotesState(notes: _notesRepository.getNotes());
+  }
+
+  ///Checks the mode of the app and fires an event depending on de mode
+  updateNote(Note note){
+    if(_modeBloc.state == AppMode.isLookingForScales){
+      add(UpdateNote(note));
+    }
   }
 
   ///Fires a clear notes event
@@ -72,7 +90,6 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
   }
 
   Stream<NotesState> _mapUpdateAllNotesToState(UpdateAllNotes event) async* {
-    selectedNotes.clear();
     final List<Note> updatedNotes = List<Note>();
     for(Note note in event.notes) {
       final Note updatedNote = note.copyWith(isSharp: note.isSharp, value: note.value, isSelected: note.isSelected, midi: note.midi);
@@ -80,6 +97,12 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
     }
 
     yield NotesState(notes: event.notes);
+  }
+
+  @override
+  Future<void> close() {
+    _modeSubscription?.cancel();
+    return super.close();
   }
 
 }

@@ -91,14 +91,36 @@ class _AnimatedSwitchModeButtonState extends State<AnimatedSwitchModeButton> {
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      onPressed: _toggleMode,
-      child: BlocBuilder<ModeBloc, bool>(
-          builder: (BuildContext context, bool isLookingForScales) {
-            return Text(isLookingForScales ? 'Play freely' : 'Look for scales');
-          }),
-    );
+    return BlocBuilder<ModeBloc, AppMode>(
+        builder: (BuildContext context, AppMode mode) {
+
+          VoidCallback onButtonPressed;
+          Widget buttonChild = Text('');
+
+          switch (mode){
+            case AppMode.isLookingForScales:
+              onButtonPressed = () => _changeMode(AppMode.isJustPlaying);
+              buttonChild = Text('Play freely');
+              break;
+            case AppMode.isJustPlaying:
+              onButtonPressed = () => _changeMode(AppMode.isLookingForScales);
+              buttonChild = Text('Look for scales');
+              break;
+            case AppMode.isScaleSelected:
+              buttonChild = Text('Playing scale');
+              break;
+          }
+
+          return RaisedButton(
+            onPressed: onButtonPressed,
+            child: buttonChild,
+          );
+
+        });
   }
 
-  _toggleMode() => _modeBloc.toggleMode();
+  _changeMode(AppMode mode) {
+    print(mode);
+    return _modeBloc.changeMode(mode: mode);
+  }
 }

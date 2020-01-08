@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scales_app/blocs/mode_bloc/bloc.dart';
 import 'package:scales_app/blocs/scales_bloc/bloc.dart';
 import 'package:scales_app/blocs/sound_bloc/bloc.dart';
 import 'package:scales_app/models/Scale.dart';
@@ -29,7 +30,6 @@ class DraggableScalesSheetState extends State<DraggableScalesSheet> with SingleT
     return BlocListener<ScalesBloc, ScalesState>(
       listener: (context, state) {
         if(state is ScalesLoaded){
-
           if(state.scales.isNotEmpty) _controller.forward();
           else if (state.scales.isEmpty) _controller.reverse();
         }
@@ -62,16 +62,6 @@ class DraggableScalesSheetState extends State<DraggableScalesSheet> with SingleT
                         if(state is ScalesLoaded){
 
                           return Expanded(
-//                            child: GridView.count(
-//                                controller: scrollController,
-//                                shrinkWrap: true,
-//                                scrollDirection: Axis.vertical,
-//                                crossAxisCount: 4,
-//                                children: state.scales
-//                                    .map((scale) => Padding(
-//                                  padding: const EdgeInsets.all(12.0),
-//                                  child: ScaleButton(scale: scale),
-//                                )).toList()),
                           child: ListView.builder(
                               itemCount: state.scales.length,
                               itemBuilder: (BuildContext context, int index){
@@ -113,8 +103,11 @@ class ScaleButton extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(scale.root + " " + scale.type, style: TextStyle(color: Theme.of(context).primaryColor)),
-      onTap: () => BlocProvider.of<ScalesBloc>(context).selectScale(scale),
+      title: Text(scale.root + " " + scale.type, style: TextStyle(color: Theme.of(context).backgroundColor)),
+      onTap: () {
+        BlocProvider.of<ModeBloc>(context).changeMode(mode: AppMode.isScaleSelected);
+        BlocProvider.of<ScalesBloc>(context).selectScale(scale);
+      },
       trailing: IconButton(
         icon: Icon(Icons.play_circle_outline),
         color: Theme.of(context).backgroundColor,
