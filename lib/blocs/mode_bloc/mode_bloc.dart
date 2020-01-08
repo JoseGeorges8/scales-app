@@ -1,8 +1,5 @@
 import 'dart:async';
-import 'dart:math';
 import 'package:bloc/bloc.dart';
-import './bloc.dart';
-
 
 /// Mode defines whether we are in freestyle mode or search scales mode
 /// Freestyle mode - Play notes as you please
@@ -12,7 +9,7 @@ import './bloc.dart';
 class ModeBloc extends Bloc<bool, bool> {
 
   @override
-  bool get initialState => false;
+  bool get initialState => true;
 
   toggleMode() => add(!state);
 

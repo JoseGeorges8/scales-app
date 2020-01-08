@@ -17,7 +17,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-
   NotesBloc _notesBloc;
   SoundBloc _soundBloc;
 
@@ -41,34 +40,33 @@ class _HomePageState extends State<HomePage>
       ),
       body: BlocBuilder<NotesBloc, NotesState>(
           builder: (BuildContext context, NotesState state) {
-              return SizedBox.expand(
-                child: Stack(
-                  children: <Widget>[
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        NotesButtonGroup(notes: state.notes),
-                        Divider(),
-                        BottomContainer(),
-                      ],
-                    ),
-                    ScalesBlocProvider(child: DraggableScalesSheet())
-                  ],
-                ),
-              );
+        return SizedBox.expand(
+          child: Stack(
+            children: <Widget>[
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  NotesButtonGroup(notes: state.notes),
+                  Divider(),
+                  BottomContainer(),
+                ],
+              ),
+              ScalesBlocProvider(child: DraggableScalesSheet())
+            ],
+          ),
+        );
       }),
       floatingActionButton: ClearButton(onPressed: _onClearButtonPressed),
     );
   }
 
-  _onClearButtonPressed(){
-    if(_notesBloc.clearNotes()) _soundBloc.playRandomNotes();
+  _onClearButtonPressed() {
+    if (_notesBloc.clearNotes()) _soundBloc.playRandomNotes();
   }
-
 }
 
 //todo: move this to its on file when defined properly
-class BottomContainer extends StatelessWidget{
+class BottomContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitchModeButton();
@@ -76,12 +74,13 @@ class BottomContainer extends StatelessWidget{
 }
 
 //todo: move this to its on file when defined properly
-class AnimatedSwitchModeButton extends StatefulWidget{
+class AnimatedSwitchModeButton extends StatefulWidget {
   @override
-  _AnimatedSwitchModeButtonState createState() => _AnimatedSwitchModeButtonState();
+  _AnimatedSwitchModeButtonState createState() =>
+      _AnimatedSwitchModeButtonState();
 }
+
 class _AnimatedSwitchModeButtonState extends State<AnimatedSwitchModeButton> {
- 
   ModeBloc _modeBloc;
 
   @override
@@ -89,12 +88,17 @@ class _AnimatedSwitchModeButtonState extends State<AnimatedSwitchModeButton> {
     _modeBloc = BlocProvider.of<ModeBloc>(context);
     super.initState();
   }
-  
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return RaisedButton(
+      onPressed: _toggleMode,
+      child: BlocBuilder<ModeBloc, bool>(
+          builder: (BuildContext context, bool isLookingForScales) {
+            return Text(isLookingForScales ? 'Play freely' : 'Look for scales');
+          }),
+    );
   }
-  
-  
+
   _toggleMode() => _modeBloc.toggleMode();
 }
