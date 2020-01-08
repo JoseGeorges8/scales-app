@@ -4,11 +4,12 @@ import 'package:scales_app/models/Note.dart';
 import 'package:scales_app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+//todo: work on stop sound later. right now the forked plugin is on my personal computer
 abstract class SoundBaseProvider{
 
   Future<void> initialize();
   Future<void> playNote(Note note);
-  Future<void> stopSound(bool fully);
+//  Future<void> stopSound(bool fully);
   Future<void> changeSound(String sound);
   List<String> getSounds();
   Future<String> getCurrentSound();
@@ -58,8 +59,8 @@ class FlutterMidiSoundProvider extends SoundBaseProvider {
     if (sound == null) sharedPreferences.setString(SOUND_KEY, PIANO_SOUND_OPTION);
     return sound ?? PIANO_SOUND_OPTION;
   }
-
-  @override
-  Future<void> stopSound(bool fully) => FlutterMidi.stopSound(fully: fully);
+//
+//  @override
+//  Future<void> stopSound(bool fully) => FlutterMidi.stopSound(fully: fully);
 
 }

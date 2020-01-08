@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scales_app/blocs/scales_bloc/bloc.dart';
 import 'package:scales_app/blocs/sound_bloc/bloc.dart';
 import 'package:scales_app/models/Scale.dart';
-import 'package:scales_app/widgets/texts.dart';
 
+/// This widget displays all the found scales
 class DraggableScalesSheet extends StatefulWidget{
 
   @override
@@ -62,16 +62,22 @@ class DraggableScalesSheetState extends State<DraggableScalesSheet> with SingleT
                         if(state is ScalesLoaded){
 
                           return Expanded(
-                            child: GridView.count(
-                                controller: scrollController,
-                                shrinkWrap: true,
-                                scrollDirection: Axis.vertical,
-                                crossAxisCount: 4,
-                                children: state.scales
-                                    .map((scale) => Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: ScaleButton(scale: scale),
-                                )).toList()),
+//                            child: GridView.count(
+//                                controller: scrollController,
+//                                shrinkWrap: true,
+//                                scrollDirection: Axis.vertical,
+//                                crossAxisCount: 4,
+//                                children: state.scales
+//                                    .map((scale) => Padding(
+//                                  padding: const EdgeInsets.all(12.0),
+//                                  child: ScaleButton(scale: scale),
+//                                )).toList()),
+                          child: ListView.builder(
+                              itemCount: state.scales.length,
+                              itemBuilder: (BuildContext context, int index){
+                                final Scale scale = state.scales[index];
+                                return ScaleButton(scale: scale);
+                              }),
                           );
 
                         }
@@ -97,7 +103,7 @@ class DraggableScalesSheetState extends State<DraggableScalesSheet> with SingleT
 
 }
 
-
+///This widget represents one scale
 class ScaleButton extends StatelessWidget{
 
   final Scale scale;
@@ -106,10 +112,14 @@ class ScaleButton extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      color: Theme.of(context).backgroundColor,
-      child: Center(child: Text(scale.root + " " + scale.type, style: TextStyle(color: Theme.of(context).primaryColor))),
-      onPressed: () => BlocProvider.of<SoundBloc>(context).playScale(scale),
+    return ListTile(
+      title: Text(scale.root + " " + scale.type, style: TextStyle(color: Theme.of(context).primaryColor)),
+      onTap: () => BlocProvider.of<ScalesBloc>(context).selectScale(scale),
+      trailing: IconButton(
+        icon: Icon(Icons.play_circle_outline),
+        color: Theme.of(context).backgroundColor,
+        onPressed: () => BlocProvider.of<SoundBloc>(context).playScale(scale)
+      ),
     );
   }
 
