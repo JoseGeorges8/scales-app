@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage>
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  NotesButtonGroup(notes: state.notes),
+                  state.notes.length == 12 ? NotesButtonGroup(notes: state.notes) : Container(),
                   Divider(),
                   BottomContainer(),
                 ],
@@ -100,11 +100,11 @@ class _AnimatedSwitchModeButtonState extends State<AnimatedSwitchModeButton> {
           switch (mode){
             case AppMode.isLookingForScales:
               onButtonPressed = () => _changeMode(AppMode.isJustPlaying);
-              buttonChild = Text('Play freely');
+              buttonChild = Text('Switch to play mode');
               break;
             case AppMode.isJustPlaying:
               onButtonPressed = () => _changeMode(AppMode.isLookingForScales);
-              buttonChild = Text('Look for scales');
+              buttonChild = Text('Switch lookup scales mode');
               break;
             case AppMode.isScaleSelected:
               buttonChild = Text('Playing scale');
