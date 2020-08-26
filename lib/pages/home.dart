@@ -44,10 +44,9 @@ class _HomePageState extends State<HomePage>
           child: Stack(
             children: <Widget>[
               Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   state.notes.length == 12 ? NotesButtonGroup(notes: state.notes) : Container(),
-                  Divider(),
                   BottomContainer(),
                 ],
               ),
@@ -56,7 +55,13 @@ class _HomePageState extends State<HomePage>
           ),
         );
       }),
-      floatingActionButton: ClearButton(onPressed: _onClearButtonPressed),
+      floatingActionButton: BlocBuilder<NotesBloc, NotesState>(
+        builder: (context, state) {
+          if(BlocProvider.of<NotesBloc>(context).selectedNotes.isNotEmpty)
+            return ClearButton(onPressed: _onClearButtonPressed);
+          return Container();
+        }
+      ),
     );
   }
 
@@ -95,32 +100,31 @@ class _AnimatedSwitchModeButtonState extends State<AnimatedSwitchModeButton> {
         builder: (BuildContext context, AppMode mode) {
 
           VoidCallback onButtonPressed;
-          Widget buttonChild = Text('');
+          String text = '';
 
           switch (mode){
             case AppMode.isLookingForScales:
               onButtonPressed = () => _changeMode(AppMode.isJustPlaying);
-              buttonChild = Text('Switch to play mode');
+              text = 'Switch to play mode';
               break;
             case AppMode.isJustPlaying:
               onButtonPressed = () => _changeMode(AppMode.isLookingForScales);
-              buttonChild = Text('Switch lookup scales mode');
+              text = 'Switch lookup scales mode';
               break;
             case AppMode.isScaleSelected:
-              buttonChild = Text('Playing scale');
+              text = 'Playing scale';
               break;
           }
 
           return RaisedButton(
+            color: Theme.of(context).primaryColor,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
             onPressed: onButtonPressed,
-            child: buttonChild,
+            child: Text(text, style: TextStyle(color: Theme.of(context).scaffoldBackgroundColor),),
           );
 
         });
   }
 
-  _changeMode(AppMode mode) {
-    print(mode);
-    return _modeBloc.changeMode(mode: mode);
-  }
+  _changeMode(AppMode mode) => _modeBloc.changeMode(mode: mode);
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scales_app/blocs/mode_bloc/bloc.dart';
-import 'package:scales_app/blocs/scales_bloc/bloc.dart';
+import 'package:scales_app/blocs/scales_bloc/scales_cubit.dart';
 import 'package:scales_app/blocs/sound_bloc/bloc.dart';
 import 'package:scales_app/models/Scale.dart';
 
@@ -27,12 +27,10 @@ class DraggableScalesSheetState extends State<DraggableScalesSheet> with SingleT
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<ScalesBloc, ScalesState>(
+    return BlocListener<ScalesCubit, List<Scale>>(
       listener: (context, state) {
-        if(state is ScalesLoaded){
-          if(state.scales.isNotEmpty) _controller.forward();
-          else if (state.scales.isEmpty) _controller.reverse();
-        }
+          if(state.isNotEmpty) _controller.forward();
+          else if (state.isEmpty) _controller.reverse();
       },
       child: SlideTransition(
         position: _tween.animate(_controller),
@@ -55,25 +53,16 @@ class DraggableScalesSheetState extends State<DraggableScalesSheet> with SingleT
                       physics: ClampingScrollPhysics(),
                       controller: scrollController
                   ),
-                  BlocBuilder<ScalesBloc, ScalesState>(
-                      builder: (BuildContext context, ScalesState state) {
-
-
-                        if(state is ScalesLoaded){
-
+                  BlocBuilder<ScalesCubit, List<Scale>>(
+                      builder: (BuildContext context, state) {
                           return Expanded(
                           child: ListView.builder(
-                              itemCount: state.scales.length,
+                              itemCount: state.length,
                               itemBuilder: (BuildContext context, int index){
-                                final Scale scale = state.scales[index];
+                                final Scale scale = state[index];
                                 return ScaleButton(scale: scale);
                               }),
                           );
-
-                        }
-
-                        return Container();
-
                     }
                   ),
                 ],
@@ -106,7 +95,7 @@ class ScaleButton extends StatelessWidget{
       title: Text(scale.root + " " + scale.type, style: TextStyle(color: Theme.of(context).backgroundColor)),
       onTap: () {
         BlocProvider.of<ModeBloc>(context).changeMode(mode: AppMode.isScaleSelected);
-        BlocProvider.of<ScalesBloc>(context).selectScale(scale);
+        BlocProvider.of<ScalesCubit>(context).selectScale(scale);
       },
       trailing: IconButton(
         icon: Icon(Icons.play_circle_outline),

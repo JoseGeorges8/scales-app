@@ -25,11 +25,6 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
     this.add(UpdateAllNotes(_notesRepository.getNotes()));
   }
 
-  @override
-  NotesState get initialState {
-    return NotesState(notes: _notesRepository.getNotes());
-  }
-
   ///Checks the mode of the app and fires an event depending on de mode
   updateNote(Note note){
     if(_modeBloc.state == AppMode.isLookingForScales){
