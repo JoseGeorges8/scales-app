@@ -14,15 +14,14 @@ class SoundBloc extends Bloc<SoundEvent, SoundState> {
 
   final FlutterMidiSoundProvider soundProvider = FlutterMidiSoundProvider();
 
+  SoundBloc([SoundState initialState]) : super(SoundState.initial()){
+    _initialize();
+  }
+
   _initialize() async {
     sounds = soundProvider.getSounds();
     currentSound = await soundProvider.getCurrentSound();
     await soundProvider.initialize();
-  }
-  @override
-  SoundState get initialState {
-    _initialize();
-    return SoundState.initial();
   }
 
   playNote(Note note) {

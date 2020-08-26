@@ -15,7 +15,7 @@ class ScalesBloc extends Bloc<ScalesEvent, ScalesState> {
   ScalesBloc(
       {@required NotesBloc notesBloc})
       : assert(notesBloc != null),
-        _notesBloc = notesBloc {
+        _notesBloc = notesBloc, super(ScalesLoaded(scales: List<Scale>())) {
 
     _notesSubscription = _notesBloc.listen((state) {
       add(ScalesUpdated(scales: _scalesRepository.getScales(selectedNotes: _notesBloc.selectedNotes)));
@@ -23,10 +23,6 @@ class ScalesBloc extends Bloc<ScalesEvent, ScalesState> {
   }
 
   selectScale(Scale scale) => _notesBloc.add(UpdateAllNotes(scale.playableNotes));
-
-  @override
-  ScalesState get initialState => ScalesLoaded(scales: List<Scale>());
-
   @override
   Stream<ScalesState> mapEventToState(
     ScalesEvent event,

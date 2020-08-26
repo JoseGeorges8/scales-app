@@ -12,11 +12,8 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
 
   final ThemeRepository _repository = ThemeRepository(provider: ThemeSharedPrefProvider());
 
-  ///This initial state should be defined by shared pref
-  @override
-  ThemeState get initialState {
+  ThemeBloc([ThemeState initialState]) : super(ThemeState.loading()){
     initialize();
-    return ThemeState.loading();
   }
 
   initialize() async {

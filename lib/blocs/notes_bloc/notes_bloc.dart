@@ -16,10 +16,13 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
   final List<String> selectedNotes = List<String>();
   final NotesRepository _notesRepository = NotesRepository(provider: NotesBasicProvider());
 
-  NotesBloc({@required modeBloc}) : assert(modeBloc != null), _modeBloc = modeBloc {
+  NotesBloc({@required modeBloc}) :
+        assert(modeBloc != null),
+        _modeBloc = modeBloc,
+        super(NotesState(notes: [])) {
     _modeSubscription = modeBloc.listen((mode){
-
     });
+    this.add(UpdateAllNotes(_notesRepository.getNotes()));
   }
 
   @override

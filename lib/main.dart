@@ -8,16 +8,8 @@ import 'package:bloc/bloc.dart';
 import 'blocs/sound_bloc/sound_bloc.dart';
 import 'pages/home.dart';
 
-class SimpleBlocDelegate extends BlocDelegate {
-  @override
-  onTransition(Bloc bloc, Transition transition) {
-    super.onTransition(bloc, transition);
-    print(transition);
-  }
-}
 
 void main() {
-  BlocSupervisor.delegate = SimpleBlocDelegate();
   runApp(MultiBlocProvider(
       providers: [
         BlocProvider<ThemeBloc>(

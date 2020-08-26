@@ -9,8 +9,7 @@ import 'bloc.dart';
 /// Made it a boolean because there is only two modes always
 class ModeBloc extends Bloc<AppMode, AppMode> {
 
-  @override
-  AppMode get initialState => AppMode.isLookingForScales;
+  ModeBloc([AppMode initialState]) : super(AppMode.isLookingForScales);
 
   changeMode({AppMode mode}) => add(mode);
 

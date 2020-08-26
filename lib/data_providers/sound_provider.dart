@@ -1,5 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:flutter_midi/flutter_midi.dart';
+//import 'package:flutter_midi/flutter_midi.dart';
 import 'package:scales_app/models/Note.dart';
 import 'package:scales_app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,15 +26,15 @@ class FlutterMidiSoundProvider extends SoundBaseProvider {
     final currentSound  = await getCurrentSound();
 
     // Initialize the midi player. If the sound key was null (first time opened or never changed before) then default to the piano sound
-    FlutterMidi.unmute();
+//    FlutterMidi.unmute();
     rootBundle.load("assets/sounds/${currentSound ?? PIANO_SOUND_OPTION}.sf2").then((sf2) {
-      FlutterMidi.prepare(sf2: sf2, name: "${currentSound ?? PIANO_SOUND_OPTION}.sf2");
+//      FlutterMidi.prepare(sf2: sf2, name: "${currentSound ?? PIANO_SOUND_OPTION}.sf2");
     });
   }
 
   @override
   Future<void> playNote(Note note) {
-    return FlutterMidi.playMidiNote(midi: note.midi);
+//    return FlutterMidi.playMidiNote(midi: note.midi);
   }
 
   @override
@@ -45,7 +45,7 @@ class FlutterMidiSoundProvider extends SoundBaseProvider {
     sharedPreferences.setString(SOUND_KEY, sound);
     // Prepare the midi player. If the sound key was null (first time opened or never changed before) then default to the piano sound
     rootBundle.load("assets/sounds/${sound ?? PIANO_SOUND_OPTION}.sf2").then((sf2) {
-      FlutterMidi.changeSound(sf2: sf2, name: "${sound ?? PIANO_SOUND_OPTION}.sf2");
+//      FlutterMidi.changeSound(sf2: sf2, name: "${sound ?? PIANO_SOUND_OPTION}.sf2");
     });
   }
 
