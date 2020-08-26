@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scales_app/blocs/notes_bloc/bloc.dart';
-import 'package:scales_app/blocs/scales_bloc/scales_cubit.dart';
+import 'package:scales_app/blocs/scales_cubit/scales_cubit.dart';
 
 class ScalesBlocProvider extends StatelessWidget{
 

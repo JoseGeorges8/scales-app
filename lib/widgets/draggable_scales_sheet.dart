@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scales_app/blocs/mode_bloc/bloc.dart';
-import 'package:scales_app/blocs/scales_bloc/scales_cubit.dart';
+import 'package:scales_app/blocs/scales_cubit/scales_cubit.dart';
 import 'package:scales_app/blocs/sound_bloc/bloc.dart';
 import 'package:scales_app/models/Scale.dart';
 
@@ -91,16 +91,23 @@ class ScaleButton extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(scale.root + " " + scale.type, style: TextStyle(color: Theme.of(context).backgroundColor)),
-      onTap: () {
-        BlocProvider.of<ModeBloc>(context).changeMode(mode: AppMode.isScaleSelected);
-        BlocProvider.of<ScalesCubit>(context).selectScale(scale);
-      },
-      trailing: IconButton(
-        icon: Icon(Icons.play_circle_outline),
-        color: Theme.of(context).backgroundColor,
-        onPressed: () => BlocProvider.of<SoundBloc>(context).playScale(scale)
+    if(scale.isSelected);
+    print(scale.isSelected);
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: scale.isSelected ? Theme.of(context).backgroundColor : Colors.transparent, width: 3)
+      ),
+      child: ListTile(
+        title: Text(scale.root + " " + scale.type, style: TextStyle(color: Theme.of(context).backgroundColor)),
+        onTap: () {
+//          BlocProvider.of<ModeBloc>(context).changeMode(mode: AppMode.isScaleSelected);
+//          BlocProvider.of<ScalesCubit>(context).selectScale(scale);
+        },
+//        trailing: IconButton(
+//          icon: Icon(Icons.play_circle_outline),
+//          color: Theme.of(context).backgroundColor,
+//          onPressed: () => BlocProvider.of<SoundBloc>(context).playScale(scale)
+//        ),
       ),
     );
   }

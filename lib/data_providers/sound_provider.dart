@@ -1,15 +1,15 @@
 import 'package:flutter/services.dart';
+import 'package:flutter_midi/flutter_midi.dart';
 //import 'package:flutter_midi/flutter_midi.dart';
 import 'package:scales_app/models/Note.dart';
 import 'package:scales_app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-//todo: work on stop sound later. right now the forked plugin is on my personal computer
 abstract class SoundBaseProvider{
 
   Future<void> initialize();
   Future<void> playNote(Note note);
-//  Future<void> stopSound(bool fully);
+  Future<void> stopNote(Note note);
   Future<void> changeSound(String sound);
   List<String> getSounds();
   Future<String> getCurrentSound();
@@ -17,6 +17,18 @@ abstract class SoundBaseProvider{
 }
 
 class FlutterMidiSoundProvider extends SoundBaseProvider {
+
+  static final FlutterMidiSoundProvider _singleton = FlutterMidiSoundProvider._internal();
+
+  FlutterMidi _midiCtrl;
+
+  factory FlutterMidiSoundProvider() {
+    return _singleton;
+  }
+
+  FlutterMidiSoundProvider._internal(){
+    _midiCtrl = FlutterMidi();
+  }
 
   @override
   // ignore: missing_return
@@ -26,27 +38,23 @@ class FlutterMidiSoundProvider extends SoundBaseProvider {
     final currentSound  = await getCurrentSound();
 
     // Initialize the midi player. If the sound key was null (first time opened or never changed before) then default to the piano sound
-//    FlutterMidi.unmute();
+    _midiCtrl.unmute();
     rootBundle.load("assets/sounds/${currentSound ?? PIANO_SOUND_OPTION}.sf2").then((sf2) {
-//      FlutterMidi.prepare(sf2: sf2, name: "${currentSound ?? PIANO_SOUND_OPTION}.sf2");
+      _midiCtrl.prepare(sf2: sf2, name: "${currentSound ?? PIANO_SOUND_OPTION}.sf2");
     });
   }
 
   @override
-  Future<void> playNote(Note note) {
-//    return FlutterMidi.playMidiNote(midi: note.midi);
-  }
+  Future<void> playNote(Note note) => _midiCtrl.playMidiNote(midi: note.midi);
 
   @override
-  // ignore: missing_return
   Future<void> changeSound(String sound) async {
+    final sf2 = await rootBundle.load("assets/sounds/${sound ?? PIANO_SOUND_OPTION}.sf2");
+    _midiCtrl.changeSound(sf2: sf2, name: "${sound ?? PIANO_SOUND_OPTION}.sf2");
+
     // Set the sound
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.setString(SOUND_KEY, sound);
-    // Prepare the midi player. If the sound key was null (first time opened or never changed before) then default to the piano sound
-    rootBundle.load("assets/sounds/${sound ?? PIANO_SOUND_OPTION}.sf2").then((sf2) {
-//      FlutterMidi.changeSound(sf2: sf2, name: "${sound ?? PIANO_SOUND_OPTION}.sf2");
-    });
   }
 
   @override
@@ -59,8 +67,8 @@ class FlutterMidiSoundProvider extends SoundBaseProvider {
     if (sound == null) sharedPreferences.setString(SOUND_KEY, PIANO_SOUND_OPTION);
     return sound ?? PIANO_SOUND_OPTION;
   }
-//
-//  @override
-//  Future<void> stopSound(bool fully) => FlutterMidi.stopSound(fully: fully);
+
+  @override
+  Future<void> stopNote(Note note) => _midiCtrl.stopMidiNote(midi: note.midi);
 
 }

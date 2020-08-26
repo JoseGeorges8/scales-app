@@ -10,6 +10,7 @@ class SoundBloc extends Bloc<SoundEvent, SoundState> {
   List<String> sounds = List<String>();
   String currentSound;
 
+  Note _lastPlayedNote;
   bool _soundStopped = false;
 
   final FlutterMidiSoundProvider soundProvider = FlutterMidiSoundProvider();
@@ -25,34 +26,36 @@ class SoundBloc extends Bloc<SoundEvent, SoundState> {
   }
 
   playNote(Note note) {
-    this.stopSound();
-    return soundProvider.playNote(note);
+    this.stopNote();
+    soundProvider.playNote(note);
+    _lastPlayedNote = note;
   }
 
-  //todo: will work on this later
-  stopSound({bool fully = true}) {
-//    _soundStopped = true;
-//    soundProvider.stopSound(fully);
+  stopNote() {
+    if(_lastPlayedNote != null){
+      soundProvider.stopNote(_lastPlayedNote);
+      _soundStopped = true;
+      _lastPlayedNote = null;
+    }
   }
 
   playRandomNotes() {
-    this.stopSound();
+    this.stopNote();
     soundProvider.playNote(Note.B());
     soundProvider.playNote(Note.dFlat());
     soundProvider.playNote(Note.gFlat());
     soundProvider.playNote(Note.A());
   }
 
-  //todo: will work on this later
   playScale(Scale scale) async {
-//    this.stopSound();
-//    await Future.delayed(new Duration(milliseconds: 500));
-//    _soundStopped = false;
-//    for(Note note in scale.playableNotes){
-//      if(_soundStopped) return;
-//      soundProvider.playNote(note);
-//      await Future.delayed(new Duration(milliseconds: 500));
-//    }
+    this.stopNote();
+    await Future.delayed(new Duration(milliseconds: 500));
+    for(Note note in scale.playableNotes){
+      print('playing $note');
+      if(_soundStopped) return;
+      soundProvider.playNote(note);
+      await Future.delayed(new Duration(milliseconds: 500));
+    }
   }
 
   @override
