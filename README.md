@@ -1,17 +1,8 @@
-# scales_app
+# Find scales app
 
-A new Flutter application.
+An app that helps you know which scales contain the notes you select. Found it helpful when goofing with a keyboard.
 
-## Getting Started
+I made the app with [flutter](https://flutter.dev/), and used [bloc](https://pub.dev/packages/flutter_bloc) as my state management. I've also used [flutter_midi](https://pub.dev/packages/flutter_midi) for playing the sounds and [shared_preferences](https://pub.dev/packages/shared_preferences) to persist settings.
 
-This project is a starting point for a Flutter application.
+![alt text](https://github.com/JoseGeorges8/scales-app/demo.png "Screenshot 1")
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# scales-app
